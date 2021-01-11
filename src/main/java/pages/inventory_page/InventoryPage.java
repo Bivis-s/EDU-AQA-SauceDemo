@@ -7,12 +7,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import pages.AbstractPage;
+import pages.footer_subpage.FooterSubpage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryPage extends AbstractPage {
+public class InventoryPage extends FooterSubpage {
     protected static final String INVENTORY_PAGE_URL = URL + "inventory.html";
     @FindBy(xpath = "//*[contains(text(),'Product')]")
     private WebElement productLabel;
