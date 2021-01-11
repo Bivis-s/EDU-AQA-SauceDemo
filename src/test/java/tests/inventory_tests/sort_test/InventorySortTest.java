@@ -3,7 +3,7 @@ package tests.inventory_tests.sort_test;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.inventory_page.Product;
-import tests.inventory_tests.inventory_test.InventoryPreTest;
+import tests.inventory_tests.InventoryPreTest;
 import tests.inventory_tests.sort_test.comparators.ProductNameAToZComparator;
 import tests.inventory_tests.sort_test.comparators.ProductNameZToAComparator;
 import tests.inventory_tests.sort_test.comparators.ProductPriceHighToLowComparator;

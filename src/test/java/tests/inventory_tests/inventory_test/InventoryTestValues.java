@@ -13,4 +13,5 @@ public class InventoryTestValues {
     public static final String VALID_PICTURE_EXTENSION = ".jpg";
     public static final StringBooleanExpression IS_STRING_NOT_EMPTY_EXPRESSION = (String string) -> !string.equals(EMPTY_STRING_VALUE);
     public static final DoubleBooleanExpression IS_DOUBLE_NOT_EMPTY_EXPRESSION = (double d) -> d > EMPTY_DOUBLE_VALUE;
+    public static final int CART_COUNTER_COUNT = 1;
 }

@@ -23,6 +23,7 @@ public class InventoryPage extends FooterSubpage {
     private Select sortSelect;
     private final By PRODUCT_BY =
             By.xpath("//*[contains(@class,'inventory_list')]//*[@class='inventory_item']");
+    private final By CART_COUNTER_BY = By.xpath("//*[contains(@class, 'fa-layers-counter')]");
 
     public InventoryPage(WebDriver driver) {
         super(driver);
@@ -67,5 +68,13 @@ public class InventoryPage extends FooterSubpage {
     public InventoryPage selectSort(String value) {
         sortSelect.selectByValue(value);
         return this;
+    }
+
+    public boolean isCartCounterVisible() {
+        return !driver.findElements(CART_COUNTER_BY).isEmpty();
+    }
+
+    public int getCartCounterCount() {
+        return Integer.parseInt(driver.findElement(CART_COUNTER_BY).getText());
     }
 }

@@ -1,4 +1,4 @@
-package tests.inventory_tests.inventory_test;
+package tests.inventory_tests;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;

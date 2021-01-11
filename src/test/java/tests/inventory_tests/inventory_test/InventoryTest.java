@@ -3,6 +3,7 @@ package tests.inventory_tests.inventory_test;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.inventory_page.Product;
+import tests.inventory_tests.InventoryPreTest;
 
 import static tests.inventory_tests.inventory_test.InventoryTestValues.*;
 
@@ -54,6 +55,27 @@ public class InventoryTest extends InventoryPreTest {
     public void productAddToCartButtonEnabledTest() {
         for (Product product : inventoryPage.getProductList()) {
             Assert.assertTrue(product.isAddToCartButtonEnabled());
+        }
+    }
+
+    @Test
+    public void productAddToCartButtonClickTest() {
+        Product product = inventoryPage.getProductList().get(0);
+        Assert.assertTrue(product.isAddToCartButtonEnabled());
+        product.addToCart();
+        Assert.assertFalse(product.isAddToCartButtonEnabled());
+    }
+
+    @Test
+    public void inventoryCartCounterTest() {
+        for (Product product : inventoryPage.getProductList()) {
+            Assert.assertFalse(inventoryPage.isCartCounterVisible(), "Cart-counter default visible");
+            product.addToCart();
+            Assert.assertEquals(inventoryPage.getCartCounterCount(), CART_COUNTER_COUNT,
+                    "Incorrect cart-counter counting. Product: " + product.toString());
+            product.removeFromCart();
+            Assert.assertFalse(inventoryPage.isCartCounterVisible(),
+                    "Product " + product.toString() + " has not been removed");
         }
     }
 }

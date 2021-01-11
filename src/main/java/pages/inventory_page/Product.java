@@ -13,6 +13,8 @@ public class Product implements Comparable<Product>{
     private final By INVENTORY_ITEM_IMG_BY = By.xpath(".//*[contains(@class,'inventory_item_img')]//img");
     private final By ADD_TO_CART_BUTTON_BY =
             By.xpath(".//*[contains(@class,'btn_inventory') and contains(text(), 'ADD TO CART')]");
+    private final By REMOVE_FROM_CART_BUTTON_BY =
+            By.xpath(".//*[contains(@class,'btn_inventory') and contains(text(), 'REMOVE')]");
 
     public Product(WebElement product) {
         this.product = product;
@@ -42,11 +44,15 @@ public class Product implements Comparable<Product>{
     }
 
     public boolean isAddToCartButtonEnabled() {
-        return product.findElement(ADD_TO_CART_BUTTON_BY).isEnabled();
+        return !product.findElements(ADD_TO_CART_BUTTON_BY).isEmpty();
     }
 
     public void addToCart() {
         product.findElement(ADD_TO_CART_BUTTON_BY).click();
+    }
+
+    public void removeFromCart() {
+        product.findElement(REMOVE_FROM_CART_BUTTON_BY).click();
     }
 
     public String getPicUrl() {
