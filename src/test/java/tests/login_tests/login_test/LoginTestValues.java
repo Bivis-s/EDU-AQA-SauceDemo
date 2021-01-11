@@ -1,4 +1,4 @@
-package tests.login_test;
+package tests.login_tests.login_test;
 
 public class LoginTestValues {
     public static final String PROBLEM_USERNAME = "problem_user";

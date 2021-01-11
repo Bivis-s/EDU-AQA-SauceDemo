@@ -1,22 +1,13 @@
-package tests.login_test;
+package tests.login_tests.login_test;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.login_page.LoginPage;
-import tests.abstract_test.AbstractTest;
 
 import static tests.GlobalValues.*;
-import static tests.login_test.LoginTestValues.*;
+import static tests.login_tests.login_test.LoginTestValues.*;
 
-public class LoginTest extends AbstractTest {
+public class LoginTest extends LoginPreTest {
     private final int OPEN_TIMEOUT = OPEN_PAGE_REDUCED_TIMEOUT;
-    LoginPage loginPage;
-
-    @BeforeMethod
-    public void initPage() {
-        loginPage = new LoginPage(getDriver());
-    }
 
     @Test
     public void inputFieldsEnabledTest() {
