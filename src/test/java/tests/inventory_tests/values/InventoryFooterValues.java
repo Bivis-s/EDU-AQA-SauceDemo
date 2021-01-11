@@ -1,4 +1,4 @@
-package tests.inventory_tests.footer_test;
+package tests.inventory_tests.values;
 
 import java.util.Arrays;
 import java.util.List;

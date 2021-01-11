@@ -2,27 +2,30 @@ package tests.inventory_tests.sort_test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.inventory_page.Product;
+import pages.AbstractProduct;
+import pages.inventory_page.InventoryProduct;
 import tests.inventory_tests.InventoryPreTest;
 import tests.inventory_tests.sort_test.comparators.ProductNameAToZComparator;
 import tests.inventory_tests.sort_test.comparators.ProductNameZToAComparator;
 import tests.inventory_tests.sort_test.comparators.ProductPriceHighToLowComparator;
 import tests.inventory_tests.sort_test.comparators.ProductPriceLowToHighComparator;
+import utilities.Utilities;
 
 import java.util.Comparator;
 import java.util.List;
 
-import static tests.inventory_tests.sort_test.InventorySortTestValues.*;
+import static tests.inventory_tests.values.InventorySortTestValues.*;
 
 public class InventorySortTest extends InventoryPreTest {
 
     //TODO ADD JAVADOC
-    private void assertProductListEquals(List<Product> firstProductList, List<Product> secondProductList) {
-        if (firstProductList.size() == secondProductList.size()) {
-            for (int i = 0; i < firstProductList.size(); i++) {
-                Assert.assertEquals(firstProductList.get(i).compareTo(secondProductList.get(i)), 0,
-                        "index " + i + ": " + firstProductList.get(i) +
-                                " not equals " + secondProductList.get(i));
+    private void assertProductListEquals(List<AbstractProduct> productList1, List<AbstractProduct> productList2) {
+        if (Utilities.equalsProductLists(productList1, productList2))
+        if (productList1.size() == productList2.size()) {
+            for (int i = 0; i < productList1.size(); i++) {
+                Assert.assertEquals(productList1.get(i).compareTo(productList2.get(i)), 0,
+                        "index " + i + ": " + productList1.get(i) +
+                                " not equals " + productList2.get(i));
             }
         } else {
             Assert.fail("Lists have different sizes");
@@ -30,15 +33,16 @@ public class InventorySortTest extends InventoryPreTest {
     }
 
     //TODO ADD JAVADOC
-    private void productSortTest(String sortType, Comparator<Product> comparator) {
+    private void productSortTest(String sortType, Comparator<InventoryProduct> comparator) {
         //get default product list and sort them using test-method
-        List<Product> expectedProductList = inventoryPage.getProductList();
+        List<InventoryProduct> expectedProductList = inventoryPage.getInventoryProductList();
         expectedProductList.sort(comparator);
         //sort products on page using page-method
         inventoryPage.selectSort(sortType);
-        List<Product> actualProductList = inventoryPage.getProductList();
+        List<InventoryProduct> actualProductList = inventoryPage.getInventoryProductList();
         //asserting both lists
-        assertProductListEquals(actualProductList, expectedProductList);
+        assertProductListEquals(Utilities.transformInventoryProductToAbstractProductList(actualProductList),
+                Utilities.transformInventoryProductToAbstractProductList(expectedProductList));
     }
 
     @Test

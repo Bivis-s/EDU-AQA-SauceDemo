@@ -6,7 +6,7 @@ import pages.footer_subpage.FooterSubpage;
 import tests.inventory_tests.InventoryPreTest;
 
 import static tests.GlobalValues.EMPTY_STRING_VALUE;
-import static tests.inventory_tests.footer_test.InventoryFooterValues.SOCIAL_MEDIA_LIST;
+import static tests.inventory_tests.values.InventoryFooterValues.SOCIAL_MEDIA_LIST;
 
 public abstract class AbstractFooterTest extends InventoryPreTest {
     protected FooterSubpage footerSubpage;

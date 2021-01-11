@@ -1,14 +1,14 @@
 package tests.inventory_tests.sort_test.comparators;
 
-import pages.inventory_page.Product;
+import pages.inventory_page.InventoryProduct;
 
 import java.util.Comparator;
 
-import static tests.inventory_tests.sort_test.InventorySortTestValues.PRICES_LOHI_COMPARE_EXPRESSION;
+import static tests.inventory_tests.values.InventorySortTestValues.PRICES_LOHI_COMPARE_EXPRESSION;
 
-public class ProductPriceLowToHighComparator implements Comparator<Product> {
+public class ProductPriceLowToHighComparator implements Comparator<InventoryProduct> {
     @Override
-    public int compare(Product a, Product b) {
+    public int compare(InventoryProduct a, InventoryProduct b) {
         return PRICES_LOHI_COMPARE_EXPRESSION.compare(a.getPriceValue(), b.getPriceValue());
     }
 }

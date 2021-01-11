@@ -1,4 +1,4 @@
-package tests.inventory_tests.sort_test;
+package tests.inventory_tests.values;
 
 import utilities.TwoDoublesIntExpression;
 import utilities.TwoStringsIntExpression;

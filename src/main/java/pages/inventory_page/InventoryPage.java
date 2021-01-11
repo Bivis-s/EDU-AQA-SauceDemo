@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import pages.cart_page.CartPage;
 import pages.footer_subpage.FooterSubpage;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class InventoryPage extends FooterSubpage {
     private WebElement subtitlePicDiv;
     @FindBy(xpath = "//*[contains(@class,'product_sort_container')]")
     private WebElement sortSelectElement;
+    @FindBy(xpath = "//*[contains(@class,'shopping_cart_link')]")
+    private WebElement cartLink;
     private Select sortSelect;
     private final By PRODUCT_BY =
             By.xpath("//*[contains(@class,'inventory_list')]//*[@class='inventory_item']");
@@ -56,13 +59,12 @@ public class InventoryPage extends FooterSubpage {
         return subtitlePicDiv.getCssValue("background-image");
     }
 
-    public List<Product> getProductList() {
-        List<Product> productList = new ArrayList<>();
-        List<WebElement> productElementList = driver.findElements(PRODUCT_BY);
-        for (WebElement productElement : productElementList) {
-            productList.add(new Product(productElement));
+    public List<InventoryProduct> getInventoryProductList() {
+        List<InventoryProduct> inventoryProductList = new ArrayList<>();
+        for (WebElement productElement : driver.findElements(PRODUCT_BY)) {
+            inventoryProductList.add(new InventoryProduct(productElement));
         }
-        return productList;
+        return inventoryProductList;
     }
 
     public InventoryPage selectSort(String value) {
@@ -76,5 +78,10 @@ public class InventoryPage extends FooterSubpage {
 
     public int getCartCounterCount() {
         return Integer.parseInt(driver.findElement(CART_COUNTER_BY).getText());
+    }
+
+    public CartPage clickCartLink() {
+        cartLink.click();
+        return new CartPage(driver);
     }
 }

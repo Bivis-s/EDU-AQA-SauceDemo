@@ -1,6 +1,7 @@
 package tests;
 
 public class GlobalValues {
+    public static final int EMPTY_INT_VALUE = 0;
     public static final double EMPTY_DOUBLE_VALUE = 0.0;
     public static final String EMPTY_STRING_VALUE = "";
 

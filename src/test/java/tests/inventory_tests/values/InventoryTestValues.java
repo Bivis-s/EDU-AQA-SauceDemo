@@ -1,4 +1,4 @@
-package tests.inventory_tests.inventory_test;
+package tests.inventory_tests.values;
 
 import utilities.DoubleBooleanExpression;
 import utilities.StringBooleanExpression;
