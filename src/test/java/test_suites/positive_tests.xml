@@ -11,6 +11,7 @@
         <classes>
             <class name="tests.inventory_tests.inventory_test.InventoryTest"/>
             <class name="tests.inventory_tests.sort_test.InventorySortTest"/>
+            <class name="tests.inventory_tests.footer_test.InventoryFooterTest"/>
         </classes>
     </test>
 </suite>

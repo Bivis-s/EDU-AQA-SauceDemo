@@ -1,4 +1,4 @@
-package tests.abstract_test;
+package tests.abstract_tests;
 
 public enum DriverType {
     CHROME,

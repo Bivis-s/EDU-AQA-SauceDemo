@@ -1,4 +1,4 @@
-package tests.abstract_test;
+package tests.abstract_tests;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;

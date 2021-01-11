@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import pages.inventory_page.InventoryPage;
 import pages.login_page.LoginPage;
-import tests.abstract_test.AbstractTest;
+import tests.abstract_tests.AbstractTest;
 
 import static tests.GlobalValues.*;
 
