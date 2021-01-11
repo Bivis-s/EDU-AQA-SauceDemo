@@ -1,5 +1,5 @@
 package utilities;
 
-public interface IDoubleEquals {
+public interface DoubleBooleanExpression {
     boolean execute(double number);
 }

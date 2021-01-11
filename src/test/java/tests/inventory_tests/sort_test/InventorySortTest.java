@@ -1,21 +1,22 @@
-package tests.inventory_test.sort_test;
+package tests.inventory_tests.sort_test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.inventory_page.Product;
-import tests.inventory_test.InventoryTest;
-import tests.inventory_test.sort_test.comparators.ProductNameAtoZComparator;
-import tests.inventory_test.sort_test.comparators.ProductNameZtoAComparator;
-import tests.inventory_test.sort_test.comparators.ProductPriceHighToLowComparator;
-import tests.inventory_test.sort_test.comparators.ProductPriceLowToHighComparator;
+import tests.inventory_tests.inventory_test.InventoryPreTest;
+import tests.inventory_tests.sort_test.comparators.ProductNameAToZComparator;
+import tests.inventory_tests.sort_test.comparators.ProductNameZToAComparator;
+import tests.inventory_tests.sort_test.comparators.ProductPriceHighToLowComparator;
+import tests.inventory_tests.sort_test.comparators.ProductPriceLowToHighComparator;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import static tests.inventory_test.sort_test.InventorySortTestValues.*;
+import static tests.inventory_tests.sort_test.InventorySortTestValues.*;
 
-public class InventorySortTest extends InventoryTest {
+public class InventorySortTest extends InventoryPreTest {
+
+    //TODO ADD JAVADOC
     private void assertProductListEquals(List<Product> firstProductList, List<Product> secondProductList) {
         if (firstProductList.size() == secondProductList.size()) {
             for (int i = 0; i < firstProductList.size(); i++) {
@@ -28,6 +29,7 @@ public class InventorySortTest extends InventoryTest {
         }
     }
 
+    //TODO ADD JAVADOC
     private void productSortTest(String sortType, Comparator<Product> comparator) {
         //get default product list and sort them using test-method
         List<Product> expectedProductList = inventoryPage.getProductList();
@@ -41,12 +43,12 @@ public class InventorySortTest extends InventoryTest {
 
     @Test
     public void productAToZSortTest() {
-        productSortTest(SORT_SELECT_VALUE_A_TO_Z, new ProductNameAtoZComparator());
+        productSortTest(SORT_SELECT_VALUE_A_TO_Z, new ProductNameAToZComparator());
     }
 
     @Test
     public void productZToASortTest() {
-        productSortTest(SORT_SELECT_VALUE_Z_TO_A, new ProductNameZtoAComparator());
+        productSortTest(SORT_SELECT_VALUE_Z_TO_A, new ProductNameZToAComparator());
     }
 
     @Test

@@ -1,5 +1,5 @@
 package utilities;
 
-public interface IStringEquals {
+public interface StringBooleanExpression {
     boolean execute(String string);
 }

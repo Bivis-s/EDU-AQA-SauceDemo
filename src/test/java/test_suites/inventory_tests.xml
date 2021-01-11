@@ -1,5 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="inventory_tests">
-
+    <test name="InventoryTest">
+        <classes>
+            <class name="tests.inventory_tests.inventory_test.InventoryTest"/>
+            <class name="tests.inventory_tests.sort_test.InventorySortTest"/>
+        </classes>
+    </test>
 </suite>

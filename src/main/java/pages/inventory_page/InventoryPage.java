@@ -57,7 +57,8 @@ public class InventoryPage extends AbstractPage {
 
     public List<Product> getProductList() {
         List<Product> productList = new ArrayList<>();
-        for (WebElement productElement : driver.findElements(PRODUCT_BY)) {
+        List<WebElement> productElementList = driver.findElements(PRODUCT_BY);
+        for (WebElement productElement : productElementList) {
             productList.add(new Product(productElement));
         }
         return productList;

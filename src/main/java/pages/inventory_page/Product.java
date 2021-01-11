@@ -7,12 +7,12 @@ public class Product implements Comparable<Product>{
     private  WebElement product;
     private  WebElement name;
     private  WebElement description;
-    private final By NAME_BY = By.xpath("//*[contains(@class,'inventory_item_name')]");
-    private final By DESCRIPTION_BY = By.xpath("//*[contains(@class,'inventory_item_desc')]");
-    private final By PRICE_BY = By.xpath("//*[contains(@class,'inventory_item_price')]");
-    private final By INVENTORY_ITEM_IMG_BY = By.xpath("//*[contains(@class,'inventory_item_img')]//img");
+    private final By NAME_BY = By.xpath(".//*[contains(@class,'inventory_item_name')]");
+    private final By DESCRIPTION_BY = By.xpath(".//*[contains(@class,'inventory_item_desc')]");
+    private final By PRICE_BY = By.xpath(".//*[contains(@class,'inventory_item_price')]");
+    private final By INVENTORY_ITEM_IMG_BY = By.xpath(".//*[contains(@class,'inventory_item_img')]//img");
     private final By ADD_TO_CART_BUTTON_BY =
-            By.xpath("//*[contains(@class,'btn_inventory') and contains(text(), 'ADD TO CART')]");
+            By.xpath(".//*[contains(@class,'btn_inventory') and contains(text(), 'ADD TO CART')]");
 
     public Product(WebElement product) {
         this.product = product;
