@@ -1,7 +1,7 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class AbstractPage {
@@ -13,20 +13,9 @@ public abstract class AbstractPage {
         return webDriverWait = new WebDriverWait(driver, timeout);
     }
 
-    protected boolean isElementEnabled(WebElement element) {
-        return element.isEnabled();
-    }
-
-    protected void clickElement(WebElement element) {
-        element.click();
-    }
-
-    protected void sendKeys(WebElement element, String... keys) {
-        element.sendKeys(keys);
-    }
-
     public AbstractPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public abstract AbstractPage waitForPageLoaded(int timeout);

@@ -4,14 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.AbstractPage;
+import pages.checkout_page.CheckoutStepOnePage;
 import pages.footer_subpage.FooterSubpage;
 import pages.inventory_page.InventoryPage;
-import pages.inventory_page.InventoryProduct;
+import products.CartProduct;
+import utilities.PageUtilities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CartPage extends FooterSubpage {
@@ -27,7 +26,6 @@ public class CartPage extends FooterSubpage {
 
     public CartPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 
     @Override
@@ -48,11 +46,7 @@ public class CartPage extends FooterSubpage {
     }
 
     public List<CartProduct> getCartProductList() {
-        List<CartProduct> cartProductList = new ArrayList<>();
-        for (WebElement productElement : driver.findElements(PRODUCT_BY)) {
-            cartProductList.add(new CartProduct(productElement));
-        }
-        return cartProductList;
+        return PageUtilities.getCartProductList(driver.findElements(PRODUCT_BY));
     }
 
     public String getSubtitleText() {
@@ -68,8 +62,8 @@ public class CartPage extends FooterSubpage {
         return checkoutButton.isEnabled();
     }
 
-    //TODO добавить checkout page
-    public AbstractPage checkout() {
-        return null;
+    public CheckoutStepOnePage checkout() {
+        checkoutButton.click();
+        return new CheckoutStepOnePage(driver);
     }
 }

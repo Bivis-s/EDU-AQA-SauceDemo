@@ -2,12 +2,12 @@ package tests.inventory_tests.inventory_test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.inventory_page.InventoryProduct;
-import tests.inventory_tests.InventoryPreTest;
+import products.InventoryProduct;
+import tests.abstract_tests.LogInAndGetInventoryBeforeTest;
 
 import static tests.inventory_tests.values.InventoryTestValues.*;
 
-public class InventoryTest extends InventoryPreTest {
+public class InventoryTest extends LogInAndGetInventoryBeforeTest {
     @Test
     public void inventorySubtitleTest() {
         Assert.assertEquals(inventoryPage.getSubtitleText(), SUBTITLE);

@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import pages.cart_page.CartPage;
 import pages.footer_subpage.FooterSubpage;
+import products.InventoryProduct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +23,14 @@ public class InventoryPage extends FooterSubpage {
     private WebElement sortSelectElement;
     @FindBy(xpath = "//*[contains(@class,'shopping_cart_link')]")
     private WebElement cartLink;
-    private Select sortSelect;
+    private final Select SORT_SELECT;
     private final By PRODUCT_BY =
             By.xpath("//*[contains(@class,'inventory_list')]//*[@class='inventory_item']");
     private final By CART_COUNTER_BY = By.xpath("//*[contains(@class, 'fa-layers-counter')]");
 
     public InventoryPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
-        sortSelect = new Select(sortSelectElement);
+        SORT_SELECT = new Select(sortSelectElement);
     }
 
     @Override
@@ -67,9 +66,8 @@ public class InventoryPage extends FooterSubpage {
         return inventoryProductList;
     }
 
-    public InventoryPage selectSort(String value) {
-        sortSelect.selectByValue(value);
-        return this;
+    public void selectSort(String value) {
+        SORT_SELECT.selectByValue(value);
     }
 
     public boolean isCartCounterVisible() {

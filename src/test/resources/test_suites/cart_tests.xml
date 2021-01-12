@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="cart_tests">
-    <test name="InventoryTest">
+<suite name="cart_tests" parallel="classes" thread-count="2">
+    <test name="CartTest">
         <classes>
             <class name="tests.cart_tests.cart_test.CartTest"/>
             <class name="tests.cart_tests.footer_test.CartFooterTest"/>

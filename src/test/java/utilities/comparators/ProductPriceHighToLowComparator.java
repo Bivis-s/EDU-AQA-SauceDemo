@@ -1,6 +1,6 @@
-package tests.inventory_tests.sort_test.comparators;
+package utilities.comparators;
 
-import pages.inventory_page.InventoryProduct;
+import products.InventoryProduct;
 
 import java.util.Comparator;
 

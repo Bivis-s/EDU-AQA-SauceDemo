@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="inventory_tests">
+<suite name="inventory_tests" parallel="classes" thread-count="3">
     <test name="InventoryTest">
         <classes>
             <class name="tests.inventory_tests.inventory_test.InventoryTest"/>

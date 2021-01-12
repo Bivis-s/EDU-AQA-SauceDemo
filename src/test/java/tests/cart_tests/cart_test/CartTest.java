@@ -3,49 +3,43 @@ package tests.cart_tests.cart_test;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.cart_page.CartPage;
-import pages.cart_page.CartProduct;
-import pages.inventory_page.InventoryProduct;
-import tests.inventory_tests.InventoryPreTest;
-import utilities.Utilities;
+import products.CartProduct;
+import products.InventoryProduct;
+import tests.abstract_tests.LogInAndGetInventoryBeforeTest;
+import utilities.TestUtilities;
 
 import java.util.List;
 
 import static tests.GlobalValues.*;
 import static tests.cart_tests.values.CartTestValues.*;
 
-public class CartTest extends InventoryPreTest {
+public class CartTest extends LogInAndGetInventoryBeforeTest {
     @Test
     public void cartSubtitleTest() {
         Assert.assertEquals((inventoryPage.clickCartLink()).getSubtitleText(), CART_SUBTITLE_TEXT);
     }
 
-    private void addAllProductsToCart(List<InventoryProduct> invProdList) {
-        for (InventoryProduct ip : invProdList) {
-            ip.addToCart();
-        }
-    }
-
     @Test
     public void addAllProductsToCartTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
-        addAllProductsToCart(inventoryProductList);
+        TestUtilities.addAllProductsToCart(inventoryProductList);
         List<CartProduct> cartProductList = inventoryPage.clickCartLink().getCartProductList();
-        Utilities.assertProductListEquals(
-                Utilities.transformInventoryProductToAbstractProductList.apply(inventoryProductList),
-                Utilities.transformCartProductToAbstractProductList.apply(cartProductList));
+        TestUtilities.assertProductListEquals(
+                TestUtilities.transformInventoryProductToAbstractProductList.apply(inventoryProductList),
+                TestUtilities.transformCartProductToAbstractProductList.apply(cartProductList));
     }
 
     @Test
     public void cartProductCountValidTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
-        addAllProductsToCart(inventoryProductList);
+        TestUtilities.addAllProductsToCart(inventoryProductList);
         Assert.assertEquals(inventoryPage.clickCartLink().getCartProductList().size(), CART_ALL_PRODUCT_COUNT);
     }
 
     @Test
     public void cartProductsCountInCartValidTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
-        addAllProductsToCart(inventoryProductList);
+        TestUtilities.addAllProductsToCart(inventoryProductList);
         for (CartProduct cartProduct : inventoryPage.clickCartLink().getCartProductList()) {
             Assert.assertEquals(cartProduct.getQuantity(), CART_PRODUCT_QUANTITY);
         }
@@ -54,7 +48,7 @@ public class CartTest extends InventoryPreTest {
     @Test
     public void cartProductRemovingTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
-        addAllProductsToCart(inventoryProductList);
+        TestUtilities.addAllProductsToCart(inventoryProductList);
         CartPage cartPage = inventoryPage.clickCartLink();
         for (CartProduct cartProduct : cartPage.getCartProductList()) {
             cartProduct.removeFromCart();
@@ -76,13 +70,13 @@ public class CartTest extends InventoryPreTest {
         inventoryProductList = inventoryPage.getInventoryProductList();
         inventoryProductList.get(0).addToCart();
         CartPage cartPage = inventoryPage.clickCartLink();
-        Assert.assertTrue(Utilities.equalProducts(inventoryProductList.get(0), cartPage.getCartProductList().get(0)));
+        Assert.assertTrue(TestUtilities.equalProducts(inventoryProductList.get(0), cartPage.getCartProductList().get(0)));
 
         cartPage.continueShopping().waitForPageLoaded(OPEN_PAGE_STANDARD_TIMEOUT);
         inventoryProductList = inventoryPage.getInventoryProductList();
         inventoryProductList.get(1).addToCart();
         inventoryPage.clickCartLink();
-        Assert.assertTrue(Utilities.equalProducts(inventoryProductList.get(1), cartPage.getCartProductList().get(1)));
+        Assert.assertTrue(TestUtilities.equalProducts(inventoryProductList.get(1), cartPage.getCartProductList().get(1)));
     }
 
     @Test

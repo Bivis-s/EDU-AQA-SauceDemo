@@ -1,8 +1,7 @@
-package pages.inventory_page;
+package products;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import pages.AbstractProduct;
 
 public class InventoryProduct extends AbstractProduct {
     private final By NAME_BY = By.xpath(".//*[contains(@class,'inventory_item_name')]");

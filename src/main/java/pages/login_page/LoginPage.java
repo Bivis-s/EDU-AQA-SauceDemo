@@ -42,29 +42,28 @@ public class LoginPage extends AbstractPage {
     }
 
     public boolean isLoginButtonEnabled() {
-        return isElementEnabled(loginButton);
+        return loginButton.isEnabled();
     }
 
     public boolean isUsernameFieldEnabled() {
-        return isElementEnabled(usernameField);
+        return usernameField.isEnabled();
     }
 
     public boolean isPasswordFieldEnabled() {
-        return isElementEnabled(passwordField);
+        return passwordField.isEnabled();
     }
 
-    public LoginPage clickLoginButton() {
-        clickElement(loginButton);
-        return this;
+    public void clickLoginButton() {
+        loginButton.click();
     }
 
     public LoginPage enterUsername(String username) {
-        sendKeys(usernameField, username);
+        usernameField.sendKeys(username);
         return this;
     }
 
     public LoginPage enterPassword(String password) {
-        sendKeys(passwordField, password);
+        passwordField.sendKeys(password);
         return this;
     }
 
@@ -77,7 +76,7 @@ public class LoginPage extends AbstractPage {
     }
 
     public LoginPage closeLoginError() {
-        clickElement(driver.findElement(By.xpath(CLOSE_ERROR_BUTTON_XPATH)));
+        driver.findElement(By.xpath(CLOSE_ERROR_BUTTON_XPATH)).click();
         return this;
     }
 

@@ -1,22 +1,20 @@
 package tests.inventory_tests.sort_test;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.AbstractProduct;
-import pages.inventory_page.InventoryProduct;
-import tests.inventory_tests.InventoryPreTest;
-import tests.inventory_tests.sort_test.comparators.ProductNameAToZComparator;
-import tests.inventory_tests.sort_test.comparators.ProductNameZToAComparator;
-import tests.inventory_tests.sort_test.comparators.ProductPriceHighToLowComparator;
-import tests.inventory_tests.sort_test.comparators.ProductPriceLowToHighComparator;
-import utilities.Utilities;
+import products.InventoryProduct;
+import tests.abstract_tests.LogInAndGetInventoryBeforeTest;
+import utilities.comparators.ProductNameAToZComparator;
+import utilities.comparators.ProductNameZToAComparator;
+import utilities.comparators.ProductPriceHighToLowComparator;
+import utilities.comparators.ProductPriceLowToHighComparator;
+import utilities.TestUtilities;
 
 import java.util.Comparator;
 import java.util.List;
 
 import static tests.inventory_tests.values.InventorySortTestValues.*;
 
-public class InventorySortTest extends InventoryPreTest {
+public class InventorySortTest extends LogInAndGetInventoryBeforeTest {
 
     //TODO ADD JAVADOC
     private void productSortTest(String sortType, Comparator<InventoryProduct> comparator) {
@@ -27,8 +25,8 @@ public class InventorySortTest extends InventoryPreTest {
         inventoryPage.selectSort(sortType);
         List<InventoryProduct> actualProductList = inventoryPage.getInventoryProductList();
         //asserting both lists
-        Utilities.assertProductListEquals(Utilities.transformInventoryProductToAbstractProductList.apply(actualProductList),
-                Utilities.transformInventoryProductToAbstractProductList.apply(expectedProductList));
+        TestUtilities.assertProductListEquals(TestUtilities.transformInventoryProductToAbstractProductList.apply(actualProductList),
+                TestUtilities.transformInventoryProductToAbstractProductList.apply(expectedProductList));
     }
 
     @Test
