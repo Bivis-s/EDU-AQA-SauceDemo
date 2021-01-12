@@ -9,6 +9,6 @@ import static tests.inventory_tests.values.InventorySortTestValues.PRICES_HILO_C
 public class ProductPriceHighToLowComparator implements Comparator<InventoryProduct> {
     @Override
     public int compare(InventoryProduct a, InventoryProduct b) {
-        return PRICES_HILO_COMPARE_EXPRESSION.compare(b.getPriceValue(), a.getPriceValue());
+        return PRICES_HILO_COMPARE_EXPRESSION.invoke(b.getPriceValue(), a.getPriceValue());
     }
 }

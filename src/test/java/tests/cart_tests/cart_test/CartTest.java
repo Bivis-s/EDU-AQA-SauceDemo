@@ -10,7 +10,7 @@ import utilities.Utilities;
 
 import java.util.List;
 
-import static tests.GlobalValues.EMPTY_INT_VALUE;
+import static tests.GlobalValues.*;
 import static tests.cart_tests.values.CartTestValues.*;
 
 public class CartTest extends InventoryPreTest {
@@ -26,13 +26,13 @@ public class CartTest extends InventoryPreTest {
     }
 
     @Test
-    public void inventoryAndCartProductEqualsTest() {
+    public void addAllProductsToCartTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
         addAllProductsToCart(inventoryProductList);
         List<CartProduct> cartProductList = inventoryPage.clickCartLink().getCartProductList();
-        Assert.assertTrue(Utilities.equalsProductLists(
-                Utilities.transformInventoryProductToAbstractProductList(inventoryProductList),
-                Utilities.transformCartProductToAbstractProductList(cartProductList)));
+        Utilities.assertProductListEquals(
+                Utilities.transformInventoryProductToAbstractProductList.apply(inventoryProductList),
+                Utilities.transformCartProductToAbstractProductList.apply(cartProductList));
     }
 
     @Test
@@ -60,5 +60,34 @@ public class CartTest extends InventoryPreTest {
             cartProduct.removeFromCart();
         }
         Assert.assertEquals(cartPage.getCartProductList().size(), EMPTY_INT_VALUE);
+    }
+
+    @Test
+    public void continueButtonTest() {
+        CartPage cartPage = inventoryPage.clickCartLink().waitForPageLoaded(OPEN_PAGE_REDUCED_TIMEOUT);
+        Assert.assertTrue(cartPage.isPageOpened());
+        Assert.assertTrue(cartPage.continueShopping().waitForPageLoaded(OPEN_PAGE_STANDARD_TIMEOUT).isPageOpened());
+    }
+
+    @Test
+    public void continueShoppingTest() {
+        List<InventoryProduct> inventoryProductList;
+
+        inventoryProductList = inventoryPage.getInventoryProductList();
+        inventoryProductList.get(0).addToCart();
+        CartPage cartPage = inventoryPage.clickCartLink();
+        Assert.assertTrue(Utilities.equalProducts(inventoryProductList.get(0), cartPage.getCartProductList().get(0)));
+
+        cartPage.continueShopping().waitForPageLoaded(OPEN_PAGE_STANDARD_TIMEOUT);
+        inventoryProductList = inventoryPage.getInventoryProductList();
+        inventoryProductList.get(1).addToCart();
+        inventoryPage.clickCartLink();
+        Assert.assertTrue(Utilities.equalProducts(inventoryProductList.get(1), cartPage.getCartProductList().get(1)));
+    }
+
+    @Test
+    public void checkoutButtonEnabledTest() {
+        Assert.assertTrue(inventoryPage.clickCartLink().waitForPageLoaded(OPEN_PAGE_REDUCED_TIMEOUT)
+                .isCheckoutButtonEnabled());
     }
 }

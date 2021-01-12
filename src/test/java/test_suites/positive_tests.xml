@@ -14,4 +14,11 @@
             <class name="tests.inventory_tests.footer_test.InventoryFooterTest"/>
         </classes>
     </test>
+
+    <test name="InventoryTest">
+        <classes>
+            <class name="tests.cart_tests.cart_test.CartTest"/>
+            <class name="tests.cart_tests.footer_test.CartFooterTest"/>
+        </classes>
+    </test>
 </suite>

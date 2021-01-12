@@ -64,6 +64,10 @@ public class CartPage extends FooterSubpage {
         return new InventoryPage(driver);
     }
 
+    public boolean isCheckoutButtonEnabled() {
+        return checkoutButton.isEnabled();
+    }
+
     //TODO добавить checkout page
     public AbstractPage checkout() {
         return null;

@@ -9,6 +9,6 @@ import static tests.inventory_tests.values.InventorySortTestValues.NAMES_COMPARE
 public class ProductNameAToZComparator implements Comparator<InventoryProduct> {
     @Override
     public int compare(InventoryProduct a, InventoryProduct b) {
-        return NAMES_COMPARE_EXPRESSION.compare(a.getNameText(), b.getNameText());
+        return NAMES_COMPARE_EXPRESSION.invoke(a.getNameText(), b.getNameText());
     }
 }

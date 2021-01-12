@@ -33,21 +33,21 @@ public class InventoryTest extends InventoryPreTest {
     @Test
     public void productPricesVisibleTest() {
         for (InventoryProduct product : inventoryPage.getInventoryProductList()) {
-            Assert.assertTrue(IS_STRING_NOT_EMPTY_EXPRESSION.execute(product.getPriceText()));
+            Assert.assertTrue(TEXT_VALID_EXPRESSION.apply(product.getPriceText()));
         }
     }
 
     @Test
     public void productPricesValidTest() {
         for (InventoryProduct product : inventoryPage.getInventoryProductList()) {
-            Assert.assertTrue(IS_DOUBLE_NOT_EMPTY_EXPRESSION.execute(product.getPriceValue()));
+            Assert.assertTrue(PRICE_VALID_EXPRESSION.apply(product.getPriceValue()));
         }
     }
 
     @Test
     public void productNamesValidTest() {
         for (InventoryProduct product : inventoryPage.getInventoryProductList()) {
-            Assert.assertTrue(IS_STRING_NOT_EMPTY_EXPRESSION.execute(product.getNameText()));
+            Assert.assertTrue(TEXT_VALID_EXPRESSION.apply(product.getNameText()));
         }
     }
 

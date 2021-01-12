@@ -1,46 +1,35 @@
 package utilities;
 
+import org.testng.Assert;
 import pages.AbstractProduct;
 import pages.cart_page.CartProduct;
 import pages.inventory_page.InventoryProduct;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class Utilities {
-    public static boolean equalsProducts(AbstractProduct p1, AbstractProduct p2) {
+    public static boolean equalProducts(AbstractProduct p1, AbstractProduct p2) {
         return p1.compareTo(p2) == 0;
     }
 
-    public static boolean equalsProductLists(List<AbstractProduct> products1, List<AbstractProduct> products2) {
-        if (products1.size() == products2.size()) {
-            for (int i = 0; i < products1.size(); i++) {
-                if (!equalsProducts(products1.get(i), products2.get(i))) {
-                    return false;
-                }
+    //TODO ADD JAVADOC
+    public static void assertProductListEquals(List<AbstractProduct> productList1, List<AbstractProduct> productList2) {
+        if (productList1.size() == productList2.size()) {
+            for (int i = 0; i < productList1.size(); i++) {
+                Assert.assertEquals(productList1.get(i).compareTo(productList2.get(i)), 0,
+                        "index " + i + ": " + productList1.get(i) +
+                                " not equals " + productList2.get(i));
             }
-            return true;
-        } else {
-            return false;
         }
     }
 
-    public static List<AbstractProduct> transformInventoryProductToAbstractProductList(List<InventoryProduct> inventoryProductList) {
-        ProductListTransformer productListTransformer = new ProductListTransformer<InventoryProduct, AbstractProduct>() {
-            @Override
-            AbstractProduct transform(InventoryProduct inventoryProduct) {
-                return (AbstractProduct) inventoryProduct;
-            }
-        };
-        return productListTransformer.transform(inventoryProductList);
-    }
+    //TODO ADD JAVADOC
+    public static Function<List<InventoryProduct>, List<AbstractProduct>>
+            transformInventoryProductToAbstractProductList = ArrayList::new;
 
-    public static List<AbstractProduct> transformCartProductToAbstractProductList(List<CartProduct> cartProductList) {
-        ProductListTransformer productListTransformer = new ProductListTransformer<CartProduct, AbstractProduct>() {
-            @Override
-            AbstractProduct transform(CartProduct cartProduct) {
-                return (AbstractProduct) cartProduct;
-            }
-        };
-        return productListTransformer.transform(cartProductList);
-    }
+    //TODO ADD JAVADOC
+    public static Function<List<CartProduct>, List<AbstractProduct>>
+            transformCartProductToAbstractProductList = ArrayList::new;
 }
