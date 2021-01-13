@@ -2,10 +2,13 @@
 
 <suite name="inventory_tests" parallel="classes" thread-count="3">
     <test name="InventoryTest">
-        <classes>
-            <class name="tests.inventory_tests.inventory_test.InventoryTest"/>
-            <class name="tests.inventory_tests.sort_test.InventorySortTest"/>
-            <class name="tests.inventory_tests.footer_test.InventoryFooterTest"/>
-        </classes>
+        <groups>
+            <run>
+                <include name="inventory_tests"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.inventory_tests.*"/>
+        </packages>
     </test>
 </suite>

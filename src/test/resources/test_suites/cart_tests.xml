@@ -2,9 +2,13 @@
 
 <suite name="cart_tests" parallel="classes" thread-count="2">
     <test name="CartTest">
-        <classes>
-            <class name="tests.cart_tests.cart_test.CartTest"/>
-            <class name="tests.cart_tests.footer_test.CartFooterTest"/>
-        </classes>
+        <groups>
+            <run>
+                <include name="cart_tests"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.cart_tests.*"/>
+        </packages>
     </test>
 </suite>

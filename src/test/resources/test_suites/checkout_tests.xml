@@ -2,9 +2,13 @@
 
 <suite name="checkout_tests" parallel="classes" thread-count="2">
     <test name="InventoryTest">
-        <classes>
-            <class name="tests.checkout_tests.checkout_test.CheckoutTest"/>
-            <class name="tests.checkout_tests.footer_test.CheckoutFooterTest"/>
-        </classes>
+        <groups>
+            <run>
+                <include name="checkout_tests"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.checkout_tests.*"/>
+        </packages>
     </test>
 </suite>

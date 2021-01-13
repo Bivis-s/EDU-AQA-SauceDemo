@@ -2,8 +2,13 @@
 
 <suite name="login_tests">
     <test name="LoginTest">
-        <classes>
-            <class name="tests.login_tests.login_test.LoginTest"/>
-        </classes>
+        <groups>
+            <run>
+                <include name="login_tests"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.login_tests.*"/>
+        </packages>
     </test>
 </suite>

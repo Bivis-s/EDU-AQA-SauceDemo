@@ -1,10 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="positive_tests">
-    <suite-files>
-        <suite-file path="login_tests.xml"/>
-        <suite-file path="inventory_tests.xml"/>
-        <suite-file path="cart_tests.xml"/>
-        <suite-file path="checkout_tests.xml"/>
-    </suite-files>
+    <test name="PositiveTests">
+        <groups>
+            <run>
+                <include name="positive_tests"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.*"/>
+        </packages>
+    </test>
 </suite>

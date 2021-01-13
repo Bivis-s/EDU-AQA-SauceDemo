@@ -1,5 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="negative_tests">
-
+    <test name="LoginTest">
+        <groups>
+            <run>
+                <include name="negative_tests"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.*"/>
+        </packages>
+    </test>
 </suite>
