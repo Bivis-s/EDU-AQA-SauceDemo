@@ -11,7 +11,7 @@ public abstract class AbstractTest {
         return driver;
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initTest() {
         driver = DriverManagerFactory.getDriverManager(DriverType.CHROME);
         driver.manage().window().maximize();

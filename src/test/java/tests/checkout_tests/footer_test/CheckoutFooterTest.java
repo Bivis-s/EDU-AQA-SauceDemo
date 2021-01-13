@@ -5,7 +5,7 @@ import tests.abstract_tests.AbstractFooterTest;
 import utilities.TestUtilities;
 
 public class CheckoutFooterTest extends AbstractFooterTest {
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         footerSubpage = TestUtilities.addOneProductGetCheckoutStepOnePage(inventoryPage);
     }

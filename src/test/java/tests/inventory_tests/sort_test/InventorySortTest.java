@@ -16,7 +16,6 @@ import static tests.inventory_tests.values.InventorySortTestValues.*;
 
 public class InventorySortTest extends LogInAndGetInventoryBeforeTest {
 
-    //TODO ADD JAVADOC
     private void productSortTest(String sortType, Comparator<InventoryProduct> comparator) {
         //get default product list and sort them using test-method
         List<InventoryProduct> expectedProductList = inventoryPage.getInventoryProductList();
@@ -29,22 +28,22 @@ public class InventorySortTest extends LogInAndGetInventoryBeforeTest {
                 TestUtilities.transformInventoryProductToAbstractProductList.apply(expectedProductList));
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "inventory_tests", "inventory_sort_tests"})
     public void productAToZSortTest() {
         productSortTest(SORT_SELECT_VALUE_A_TO_Z, new ProductNameAToZComparator());
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "inventory_tests", "inventory_sort_tests"})
     public void productZToASortTest() {
         productSortTest(SORT_SELECT_VALUE_Z_TO_A, new ProductNameZToAComparator());
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "inventory_tests", "inventory_sort_tests"})
     public void productLowToHighSortTest() {
         productSortTest(SORT_SELECT_VALUE_LOW_TO_HIGH, new ProductPriceLowToHighComparator());
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "inventory_tests", "inventory_sort_tests"})
     public void productHighToLowSortTest() {
         productSortTest(SORT_SELECT_VALUE_HIGH_TO_LOW, new ProductPriceHighToLowComparator());
     }

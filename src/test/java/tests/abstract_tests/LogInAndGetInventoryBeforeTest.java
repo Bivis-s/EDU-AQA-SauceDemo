@@ -10,7 +10,7 @@ import static tests.GlobalValues.*;
 public abstract class LogInAndGetInventoryBeforeTest extends AbstractTest {
     protected InventoryPage inventoryPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void login() {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage

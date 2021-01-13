@@ -14,12 +14,13 @@ import static tests.GlobalValues.*;
 import static tests.cart_tests.values.CartTestValues.*;
 
 public class CartTest extends LogInAndGetInventoryBeforeTest {
-    @Test
+
+    @Test(groups = {"positive_tests", "cart_tests"})
     public void cartSubtitleTest() {
         Assert.assertEquals((inventoryPage.clickCartLink()).getSubtitleText(), CART_SUBTITLE_TEXT);
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "cart_tests"})
     public void addAllProductsToCartTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
         TestUtilities.addAllProductsToCart(inventoryProductList);
@@ -29,14 +30,14 @@ public class CartTest extends LogInAndGetInventoryBeforeTest {
                 TestUtilities.transformCartProductToAbstractProductList.apply(cartProductList));
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "cart_tests"})
     public void cartProductCountValidTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
         TestUtilities.addAllProductsToCart(inventoryProductList);
         Assert.assertEquals(inventoryPage.clickCartLink().getCartProductList().size(), CART_ALL_PRODUCT_COUNT);
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "cart_tests"})
     public void cartProductsCountInCartValidTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
         TestUtilities.addAllProductsToCart(inventoryProductList);
@@ -45,7 +46,7 @@ public class CartTest extends LogInAndGetInventoryBeforeTest {
         }
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "cart_tests"})
     public void cartProductRemovingTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
         TestUtilities.addAllProductsToCart(inventoryProductList);
@@ -56,14 +57,14 @@ public class CartTest extends LogInAndGetInventoryBeforeTest {
         Assert.assertEquals(cartPage.getCartProductList().size(), EMPTY_INT_VALUE);
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "cart_tests"})
     public void continueButtonTest() {
         CartPage cartPage = inventoryPage.clickCartLink().waitForPageLoaded(OPEN_PAGE_REDUCED_TIMEOUT);
         Assert.assertTrue(cartPage.isPageOpened());
         Assert.assertTrue(cartPage.continueShopping().waitForPageLoaded(OPEN_PAGE_STANDARD_TIMEOUT).isPageOpened());
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "cart_tests"})
     public void continueShoppingTest() {
         List<InventoryProduct> inventoryProductList;
 
@@ -79,7 +80,7 @@ public class CartTest extends LogInAndGetInventoryBeforeTest {
         Assert.assertTrue(TestUtilities.equalProducts(inventoryProductList.get(1), cartPage.getCartProductList().get(1)));
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "cart_tests"})
     public void checkoutButtonEnabledTest() {
         Assert.assertTrue(inventoryPage.clickCartLink().waitForPageLoaded(OPEN_PAGE_REDUCED_TIMEOUT)
                 .isCheckoutButtonEnabled());

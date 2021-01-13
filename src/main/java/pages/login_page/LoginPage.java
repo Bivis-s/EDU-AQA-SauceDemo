@@ -17,8 +17,9 @@ public class LoginPage extends AbstractPage {
     @FindBy(id = "login-button")
     private WebElement loginButton;
     private final String LOGIN_PIC_XPATH = "//img[contains(@class,'bot_column') and not(@style='hidden')]";
-    private final String ERROR_MESSAGE_XPATH = "//*[contains(@data-test,'error')]";
-    private final String CLOSE_ERROR_BUTTON_XPATH = ERROR_MESSAGE_XPATH + "//button[contains(@class,'error-button')]";
+    private final String ERROR_XPATH = "//*[contains(@data-test,'error')]";
+    private final By ERROR_BY = By.xpath(ERROR_XPATH);
+    private final String CLOSE_ERROR_BUTTON_XPATH = ERROR_XPATH + "//button[contains(@class,'error-button')]";
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -71,8 +72,12 @@ public class LoginPage extends AbstractPage {
         return !driver.findElements(By.xpath(LOGIN_PIC_XPATH)).isEmpty();
     }
 
+    public boolean isErrorDisplayed() {
+        return !driver.findElements(ERROR_BY).isEmpty();
+    }
+
     public String getLoginErrorMessage() {
-        return driver.findElement(By.xpath(ERROR_MESSAGE_XPATH)).getText();
+        return driver.findElement(By.xpath(ERROR_XPATH)).getText();
     }
 
     public LoginPage closeLoginError() {

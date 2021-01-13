@@ -10,17 +10,17 @@ import static tests.inventory_tests.values.InventoryFooterValues.SOCIAL_MEDIA_LI
 public abstract class AbstractFooterTest extends LogInAndGetInventoryBeforeTest {
     protected FooterSubpage footerSubpage;
 
-    @Test
+    @Test(groups = {"positive_tests", "footer_tests"})
     public void footerTextCopyVisibleTest() {
         Assert.assertNotEquals(footerSubpage.getCopyText(), EMPTY_STRING_VALUE);
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "footer_tests"})
     public void footerPicPathValidTest() {
         Assert.assertTrue(footerSubpage.isPicVisible());
     }
 
-    @Test
+    @Test(groups = {"positive_tests", "footer_tests"})
     public void socialMediaListTest() {
         Assert.assertEquals(footerSubpage.getSocialTextList(), SOCIAL_MEDIA_LIST);
     }

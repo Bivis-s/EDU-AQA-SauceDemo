@@ -54,6 +54,10 @@ public class CheckoutStepOnePage extends AbstractCheckoutPage {
         return !driver.findElements(ERROR_BY).isEmpty();
     }
 
+    public String getErrorText() {
+        return driver.findElement(ERROR_BY).getText();
+    }
+
     public CheckoutStepOnePage closeError() {
         driver.findElement(CLOSE_ERROR_BUTTON_BY).click();
         return this;

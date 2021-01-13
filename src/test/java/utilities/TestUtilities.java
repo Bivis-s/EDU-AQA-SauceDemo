@@ -26,7 +26,15 @@ public class TestUtilities {
         return p1.compareTo(p2) == 0;
     }
 
-    //TODO ADD JAVADOC
+    /**
+     * Takes two List<AbstractProduct>
+     * Asserts List's sizes, if not equals fails with message about different sizes
+     * Asserts comparison of each AbstractProduct pares (using inner overridden .compareTo()),
+     * if not equals fails with message about failed pair comparison
+     *
+     * @param productList1 List<AbstractProduct>
+     * @param productList2 List<AbstractProduct>
+     */
     public static void assertProductListEquals(List<AbstractProduct> productList1, List<AbstractProduct> productList2) {
         if (productList1.size() == productList2.size()) {
             for (int i = 0; i < productList1.size(); i++) {
@@ -39,11 +47,15 @@ public class TestUtilities {
         }
     }
 
-    //TODO ADD JAVADOC
+    /**
+     * Transforms List<InventoryProduct> to List<AbstractProduct>> for later comparison
+     */
     public static Function<List<InventoryProduct>, List<AbstractProduct>>
             transformInventoryProductToAbstractProductList = ArrayList::new;
 
-    //TODO ADD JAVADOC
+    /**
+     * Transforms List<CartProduct> to List<AbstractProduct>> for later comparison
+     */
     public static Function<List<CartProduct>, List<AbstractProduct>>
             transformCartProductToAbstractProductList = ArrayList::new;
 

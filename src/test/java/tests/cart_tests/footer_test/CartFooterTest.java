@@ -6,7 +6,7 @@ import tests.abstract_tests.AbstractFooterTest;
 import static tests.GlobalValues.OPEN_PAGE_REDUCED_TIMEOUT;
 
 public class CartFooterTest extends AbstractFooterTest {
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         footerSubpage = inventoryPage.clickCartLink().waitForPageLoaded(OPEN_PAGE_REDUCED_TIMEOUT);
     }
