@@ -2,6 +2,7 @@ package tests.cart_tests.cart_test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.cart_page.CartPage;
 import products.CartProduct;
 import products.InventoryProduct;
@@ -59,30 +60,30 @@ public class CartTest extends LogInAndGetInventoryBeforeTest {
 
     @Test(groups = {"positive_tests", "cart_tests"})
     public void continueButtonTest() {
-        CartPage cartPage = inventoryPage.clickCartLink().waitForPageLoaded(OPEN_PAGE_REDUCED_TIMEOUT);
+        CartPage cartPage = inventoryPage.clickCartLink().waitForPageLoaded();
         Assert.assertTrue(cartPage.isPageOpened());
-        Assert.assertTrue(cartPage.continueShopping().waitForPageLoaded(OPEN_PAGE_STANDARD_TIMEOUT).isPageOpened());
+        Assert.assertTrue(cartPage.clickContinueShoppingButton().waitForPageLoaded().isPageOpened());
     }
 
     @Test(groups = {"positive_tests", "cart_tests"})
     public void continueShoppingTest() {
+        SoftAssert softAssert = new SoftAssert();
         List<InventoryProduct> inventoryProductList;
-
         inventoryProductList = inventoryPage.getInventoryProductList();
         inventoryProductList.get(0).addToCart();
         CartPage cartPage = inventoryPage.clickCartLink();
-        Assert.assertTrue(TestUtilities.equalProducts(inventoryProductList.get(0), cartPage.getCartProductList().get(0)));
-
-        cartPage.continueShopping().waitForPageLoaded(OPEN_PAGE_STANDARD_TIMEOUT);
+        softAssert.assertTrue(TestUtilities.equalProducts(inventoryProductList.get(0), cartPage.getCartProductList().get(0)));
+        cartPage.clickContinueShoppingButton().waitForPageLoaded();
         inventoryProductList = inventoryPage.getInventoryProductList();
         inventoryProductList.get(1).addToCart();
         inventoryPage.clickCartLink();
-        Assert.assertTrue(TestUtilities.equalProducts(inventoryProductList.get(1), cartPage.getCartProductList().get(1)));
+        softAssert.assertTrue(TestUtilities.equalProducts(inventoryProductList.get(1), cartPage.getCartProductList().get(1)));
+        softAssert.assertAll();
     }
 
     @Test(groups = {"positive_tests", "cart_tests"})
     public void checkoutButtonEnabledTest() {
-        Assert.assertTrue(inventoryPage.clickCartLink().waitForPageLoaded(OPEN_PAGE_REDUCED_TIMEOUT)
+        Assert.assertTrue(inventoryPage.clickCartLink().waitForPageLoaded()
                 .isCheckoutButtonEnabled());
     }
 }

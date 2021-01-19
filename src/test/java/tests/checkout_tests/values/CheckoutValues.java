@@ -20,8 +20,7 @@ public class CheckoutValues {
                 {EMPTY_STRING_VALUE, EMPTY_STRING_VALUE, EMPTY_STRING_VALUE, "Error: First Name is required"},
                 {"BigBaby", "", "", "Error: Last Name is required"},
                 {"BigBaby", "Tape", "", "Error: Postal Code is required"},
-                {"BigBaby", "Tape", "", "Error: Postal Code is required"},
-                //[ALWAYS FAILS] checks if error shows// after submiting invalid zip field
+                //[ALWAYS FAILS] checks if error shows after submitting invalid zip field
                 {"BigBaby", "Tape", "NotANumber", "Error: Invalid Postal Code"}
         };
     }

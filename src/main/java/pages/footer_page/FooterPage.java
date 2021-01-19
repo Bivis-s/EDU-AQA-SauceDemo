@@ -1,4 +1,4 @@
-package pages.footer_subpage;
+package pages.footer_page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class FooterSubpage extends AbstractPage {
+public abstract class FooterPage extends AbstractPage {
     @FindBy(xpath = "//ul[@class='social']")
     private WebElement socialUlElement;
     private final By SOCIAL_LI_BY = By.xpath(".//li");
@@ -18,7 +18,7 @@ public abstract class FooterSubpage extends AbstractPage {
     private WebElement copyDivElement;
     private final By FOOTER_PIC_BY = By.xpath("//img[contains(@class,'footer_robot') and not(@style='hidden')]");
 
-    public FooterSubpage(WebDriver driver) {
+    public FooterPage(WebDriver driver) {
         super(driver);
     }
 

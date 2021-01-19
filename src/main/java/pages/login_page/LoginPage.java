@@ -23,18 +23,17 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 
     @Override
-    public LoginPage waitForPageLoaded(int timeout) {
+    public LoginPage waitForPageLoaded() {
         return this;
     }
 
     @Override
-    public LoginPage open(int timeout) {
+    public LoginPage openPage() {
         driver.get(LOGIN_PAGE_URL);
-        return waitForPageLoaded(timeout);
+        return waitForPageLoaded();
     }
 
     @Override

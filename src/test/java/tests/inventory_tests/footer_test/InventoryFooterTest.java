@@ -7,6 +7,6 @@ import tests.abstract_tests.AbstractFooterTest;
 public class InventoryFooterTest extends AbstractFooterTest {
     @BeforeMethod(alwaysRun = true)
     public void initPage() {
-        footerSubpage = new InventoryPage(getDriver());
+        footerPage = new InventoryPage(getDriver());
     }
 }

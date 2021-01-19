@@ -29,23 +29,23 @@ public class CheckoutStepOnePage extends AbstractCheckoutPage {
     }
 
     @Override
-    public CheckoutStepOnePage waitForPageLoaded(int timeout) {
-        getWebDriverWait(timeout).until(ExpectedConditions.visibilityOf(getSubtitle()));
+    public CheckoutStepOnePage waitForPageLoaded() {
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(getSubtitle()));
         return this;
     }
 
     @Override
-    public CheckoutStepOnePage open(int timeout) {
+    public CheckoutStepOnePage openPage() {
         driver.get(CHECKOUT_PAGE_URL);
         return this;
     }
 
-    public CartPage cancel() {
+    public CartPage clickCancelButton() {
         cancelButton.click();
         return new CartPage(driver);
     }
 
-    public CheckoutStepTwoPage next() {
+    public CheckoutStepTwoPage clickContinueButton() {
         continueButton.click();
         return new CheckoutStepTwoPage(driver);
     }

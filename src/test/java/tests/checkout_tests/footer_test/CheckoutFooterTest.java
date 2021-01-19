@@ -7,6 +7,6 @@ import utilities.TestUtilities;
 public class CheckoutFooterTest extends AbstractFooterTest {
     @BeforeMethod(alwaysRun = true)
     public void initPage() {
-        footerSubpage = TestUtilities.addOneProductGetCheckoutStepOnePage(inventoryPage);
+        footerPage = TestUtilities.addOneProductGetCheckoutStepOnePage(inventoryPage);
     }
 }

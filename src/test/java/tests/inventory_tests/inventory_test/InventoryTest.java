@@ -62,21 +62,22 @@ public class InventoryTest extends LogInAndGetInventoryBeforeTest {
     @Test(groups = {"positive_tests", "inventory_tests"})
     public void productAddToCartButtonClickTest() {
         InventoryProduct product = inventoryPage.getInventoryProductList().get(0);
-        Assert.assertTrue(product.isAddToCartButtonEnabled());
         product.addToCart();
         Assert.assertFalse(product.isAddToCartButtonEnabled());
     }
 
     @Test(groups = {"positive_tests", "inventory_tests"})
+    public void inventoryCartCounterDefaultTest() {
+        Assert.assertFalse(inventoryPage.isCartCounterVisible(), "Cart-counter default visible");
+    }
+
+    @Test(groups = {"positive_tests", "inventory_tests"})
     public void inventoryCartCounterTest() {
         for (InventoryProduct product : inventoryPage.getInventoryProductList()) {
-            Assert.assertFalse(inventoryPage.isCartCounterVisible(), "Cart-counter default visible");
             product.addToCart();
             Assert.assertEquals(inventoryPage.getCartCounterCount(), CART_COUNTER_COUNT,
                     "Incorrect cart-counter counting. Product: " + product.toString());
             product.removeFromCart();
-            Assert.assertFalse(inventoryPage.isCartCounterVisible(),
-                    "Product " + product.toString() + " has not been removed");
         }
     }
 }

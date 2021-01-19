@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.inventory_page.InventoryPage;
 import products.CartProduct;
 import utilities.PageUtilities;
 
@@ -13,8 +12,7 @@ import java.util.List;
 
 public class CheckoutStepTwoPage extends AbstractCheckoutPage {
     public static final String CHECKOUT_STEP_TWO_PAGE_URL = URL + "checkout-step-two.html";
-    private final By PRODUCT_BY =
-            By.xpath("//*[contains(@class,'cart_list')]//*[@class='cart_item']");
+    private final By PRODUCT_BY = By.xpath("//*[contains(@class,'cart_list')]//*[@class='cart_item']");
     @FindBy(xpath = "//*[contains(@class,'btn_secondary') and contains(text(), 'CANCEL')]")
     private WebElement cancelButton;
     @FindBy(xpath = "//*[contains(@class,'cart_button') and contains(text(), 'FINISH')]")
@@ -25,13 +23,13 @@ public class CheckoutStepTwoPage extends AbstractCheckoutPage {
     }
 
     @Override
-    public CheckoutStepTwoPage waitForPageLoaded(int timeout) {
-        getWebDriverWait(timeout).until(ExpectedConditions.visibilityOf(getSubtitle()));
+    public CheckoutStepTwoPage waitForPageLoaded() {
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(getSubtitle()));
         return this;
     }
 
     @Override
-    public CheckoutStepTwoPage open(int timeout) {
+    public CheckoutStepTwoPage openPage() {
         driver.get(CHECKOUT_STEP_TWO_PAGE_URL);
         return this;
     }
@@ -40,12 +38,7 @@ public class CheckoutStepTwoPage extends AbstractCheckoutPage {
         return PageUtilities.getCartProductList(driver.findElements(PRODUCT_BY));
     }
 
-    public InventoryPage cancel() {
-        cancelButton.click();
-        return new InventoryPage(driver);
-    }
-
-    public CheckoutCompletePage finish() {
+    public CheckoutCompletePage clickFinishButton() {
         finishButton.click();
         return new CheckoutCompletePage(driver);
     }

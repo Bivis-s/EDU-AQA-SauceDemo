@@ -7,13 +7,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import pages.cart_page.CartPage;
-import pages.footer_subpage.FooterSubpage;
+import pages.footer_page.FooterPage;
 import products.InventoryProduct;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryPage extends FooterSubpage {
+public class InventoryPage extends FooterPage {
     protected static final String INVENTORY_PAGE_URL = URL + "inventory.html";
     @FindBy(xpath = "//*[contains(text(),'Product')]")
     private WebElement productLabel;
@@ -23,26 +23,23 @@ public class InventoryPage extends FooterSubpage {
     private WebElement sortSelectElement;
     @FindBy(xpath = "//*[contains(@class,'shopping_cart_link')]")
     private WebElement cartLink;
-    private final Select SORT_SELECT;
-    private final By PRODUCT_BY =
-            By.xpath("//*[contains(@class,'inventory_list')]//*[@class='inventory_item']");
+    private final By PRODUCT_BY = By.xpath("//*[contains(@class,'inventory_list')]//*[@class='inventory_item']");
     private final By CART_COUNTER_BY = By.xpath("//*[contains(@class, 'fa-layers-counter')]");
 
     public InventoryPage(WebDriver driver) {
         super(driver);
-        SORT_SELECT = new Select(sortSelectElement);
     }
 
     @Override
-    public InventoryPage waitForPageLoaded(int timeout) {
-        getWebDriverWait(timeout).until(ExpectedConditions.visibilityOf(productLabel));
+    public InventoryPage waitForPageLoaded() {
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(productLabel));
         return this;
     }
 
     @Override
-    public InventoryPage open(int timeout) {
+    public InventoryPage openPage() {
         driver.get(INVENTORY_PAGE_URL);
-        return waitForPageLoaded(timeout);
+        return waitForPageLoaded();
     }
 
     @Override
@@ -67,7 +64,7 @@ public class InventoryPage extends FooterSubpage {
     }
 
     public void selectSort(String value) {
-        SORT_SELECT.selectByValue(value);
+        (new Select(sortSelectElement)).selectByValue(value);
     }
 
     public boolean isCartCounterVisible() {

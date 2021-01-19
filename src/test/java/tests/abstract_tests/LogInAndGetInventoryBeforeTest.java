@@ -14,10 +14,10 @@ public abstract class LogInAndGetInventoryBeforeTest extends AbstractTest {
     public void login() {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage
-                .open(OPEN_PAGE_REDUCED_TIMEOUT)
+                .openPage()
                 .login(STANDARD_USER_USERNAME, STANDARD_USER_PASSWORD);
         inventoryPage = new InventoryPage(getDriver());
-        if (!inventoryPage.waitForPageLoaded(OPEN_PAGE_STANDARD_TIMEOUT).isPageOpened()) {
+        if (!inventoryPage.waitForPageLoaded().isPageOpened()) {
             Assert.fail("Inventory page has not been loaded");
         }
     }

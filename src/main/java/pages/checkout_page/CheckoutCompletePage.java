@@ -17,13 +17,13 @@ public class CheckoutCompletePage extends AbstractCheckoutPage {
     }
 
     @Override
-    public CheckoutCompletePage waitForPageLoaded(int timeout) {
-        getWebDriverWait(timeout).until(ExpectedConditions.visibilityOf(getSubtitle()));
+    public CheckoutCompletePage waitForPageLoaded() {
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(getSubtitle()));
         return this;
     }
 
     @Override
-    public CheckoutCompletePage open(int timeout) {
+    public CheckoutCompletePage openPage() {
         driver.get(CHECKOUT_COMPLETE_PAGE_URL);
         return this;
     }

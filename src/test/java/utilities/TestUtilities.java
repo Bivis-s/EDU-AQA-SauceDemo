@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-import static tests.GlobalValues.OPEN_PAGE_REDUCED_TIMEOUT;
-
 public class TestUtilities {
     public static void addAllProductsToCart(List<InventoryProduct> invProdList) {
         for (InventoryProduct ip : invProdList) {
@@ -63,7 +61,7 @@ public class TestUtilities {
         inventoryPage.getInventoryProductList().get(0).addToCart();
         return inventoryPage
                 .clickCartLink()
-                .checkout();
+                .clickCheckoutButton();
     }
 
     public static CheckoutStepTwoPage addOneProductGetCheckoutStepTwoPage(InventoryPage inventoryPage, String firstname,
@@ -72,15 +70,15 @@ public class TestUtilities {
                 .setFirstName(firstname)
                 .setLastName(lastname)
                 .setZip(zip)
-                .next()
-                .waitForPageLoaded(OPEN_PAGE_REDUCED_TIMEOUT);
+                .clickContinueButton()
+                .waitForPageLoaded();
     }
 
     public static CheckoutCompletePage addOneProductGetCheckoutCompletePage(InventoryPage inventoryPage,
                                                                             String firstname, String lastname,
                                                                             String zip) {
         return addOneProductGetCheckoutStepTwoPage(inventoryPage, firstname, lastname, zip)
-                .finish()
-                .waitForPageLoaded(OPEN_PAGE_REDUCED_TIMEOUT);
+                .clickFinishButton()
+                .waitForPageLoaded();
     }
 }
