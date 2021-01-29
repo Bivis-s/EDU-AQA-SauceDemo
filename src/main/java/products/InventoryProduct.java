@@ -1,5 +1,6 @@
 package products;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -18,18 +19,22 @@ public class InventoryProduct extends AbstractProduct {
         init(this, NAME_BY, DESCRIPTION_BY, PRICE_BY);
     }
 
+    @Step("Is add product to cart button enabled")
     public boolean isAddToCartButtonEnabled() {
         return !product.findElements(ADD_TO_CART_BUTTON_BY).isEmpty();
     }
 
+    @Step("Add product to cart")
     public void addToCart() {
         product.findElement(ADD_TO_CART_BUTTON_BY).click();
     }
 
+    @Step("Remove product from cart")
     public void removeFromCart() {
         product.findElement(REMOVE_FROM_CART_BUTTON_BY).click();
     }
 
+    @Step("Get product picture url")
     public String getPicUrl() {
         return product.findElement(INVENTORY_ITEM_IMG_BY).getAttribute("src");
     }

@@ -1,5 +1,6 @@
 package pages.checkout_page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,58 +36,70 @@ public class CheckoutStepOnePage extends AbstractCheckoutPage {
     }
 
     @Override
+    @Step("Open checkout step-one page")
     public CheckoutStepOnePage openPage() {
         driver.get(CHECKOUT_PAGE_URL);
         return this;
     }
 
+    @Step("Click cancel button")
     public CartPage clickCancelButton() {
         cancelButton.click();
         return new CartPage(driver);
     }
 
+    @Step("Click continue button")
     public CheckoutStepTwoPage clickContinueButton() {
         continueButton.click();
         return new CheckoutStepTwoPage(driver);
     }
 
+    @Step("Is checkout error displayed")
     public boolean isErrorDisplayed() {
         return !driver.findElements(ERROR_BY).isEmpty();
     }
 
+    @Step("Get error text")
     public String getErrorText() {
         return driver.findElement(ERROR_BY).getText();
     }
 
-    public CheckoutStepOnePage closeError() {
+    @Step("Click close checkout error button")
+    public CheckoutStepOnePage clickCloseErrorButton() {
         driver.findElement(CLOSE_ERROR_BUTTON_BY).click();
         return this;
     }
 
+    @Step("Is first name field enabled")
     public boolean isFirstNameFieldEnabled() {
         return firsNameInput.isEnabled();
     }
 
+    @Step("Is last name field enabled")
     public boolean isLastNameFieldEnabled() {
         return lastNameInput.isEnabled();
     }
 
+    @Step("Is zip field enabled")
     public boolean isZipFieldEnabled() {
         return zipInput.isEnabled();
     }
 
-    public CheckoutStepOnePage setFirstName(String... keys) {
-        firsNameInput.sendKeys(keys);
+    @Step("Set firs name '{firstNames}'")
+    public CheckoutStepOnePage setFirstName(String... firstNames) {
+        firsNameInput.sendKeys(firstNames);
         return this;
     }
 
-    public CheckoutStepOnePage setLastName(String... keys) {
-        lastNameInput.sendKeys(keys);
+    @Step("Set last name '{lastNames}'")
+    public CheckoutStepOnePage setLastName(String... lastNames) {
+        lastNameInput.sendKeys(lastNames);
         return this;
     }
 
-    public CheckoutStepOnePage setZip(String... keys) {
-        zipInput.sendKeys(keys);
+    @Step("Set zip '{zips}'")
+    public CheckoutStepOnePage setZip(String... zips) {
+        zipInput.sendKeys(zips);
         return this;
     }
 }

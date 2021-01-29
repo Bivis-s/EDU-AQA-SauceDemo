@@ -1,5 +1,6 @@
 package pages.checkout_page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,15 +24,18 @@ public class CheckoutCompletePage extends AbstractCheckoutPage {
     }
 
     @Override
+    @Step("Open checkout-complete page")
     public CheckoutCompletePage openPage() {
         driver.get(CHECKOUT_COMPLETE_PAGE_URL);
         return this;
     }
 
+    @Step("Get checkout complete text")
     public String getCompleteText() {
         return completeText.getText();
     }
 
+    @Step("Is complete picture displayed")
     public boolean isCompletePicDisplayed() {
         return completeImg.isDisplayed();
     }

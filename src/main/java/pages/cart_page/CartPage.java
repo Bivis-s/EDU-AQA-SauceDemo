@@ -1,5 +1,6 @@
 package pages.cart_page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +35,7 @@ public class CartPage extends FooterPage {
     }
 
     @Override
+    @Step("Open cart page")
     public CartPage openPage() {
         driver.get(CART_PAGE_URL);
         return waitForPageLoaded();
@@ -44,23 +46,28 @@ public class CartPage extends FooterPage {
         return subtitle.isDisplayed();
     }
 
+    @Step("Get cart products list")
     public List<CartProduct> getCartProductList() {
         return PageUtilities.getCartProductList(driver.findElements(PRODUCT_BY));
     }
 
+    @Step("Get cart subtitle text")
     public String getSubtitleText() {
         return subtitle.getText();
     }
 
+    @Step("Click continue shopping button")
     public InventoryPage clickContinueShoppingButton() {
         continueShoppingButton.click();
         return new InventoryPage(driver);
     }
 
+    @Step("Is checkout button enabled")
     public boolean isCheckoutButtonEnabled() {
         return checkoutButton.isEnabled();
     }
 
+    @Step("Click checkout button")
     public CheckoutStepOnePage clickCheckoutButton() {
         checkoutButton.click();
         return new CheckoutStepOnePage(driver);
