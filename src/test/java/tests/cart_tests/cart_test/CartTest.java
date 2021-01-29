@@ -1,12 +1,14 @@
 package tests.cart_tests.cart_test;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.cart_page.CartPage;
+import pages.inventory_page.InventoryPage;
 import products.CartProduct;
 import products.InventoryProduct;
-import tests.abstract_tests.LogInAndGetInventoryBeforeTest;
+import tests.abstract_tests.AbstractTest;
 import utilities.TestUtilities;
 
 import java.util.List;
@@ -14,14 +16,21 @@ import java.util.List;
 import static tests.GlobalValues.*;
 import static tests.cart_tests.values.CartTestValues.*;
 
-public class CartTest extends LogInAndGetInventoryBeforeTest {
+public class CartTest extends AbstractTest {
+    private InventoryPage inventoryPage;
 
-    @Test(groups = {"positive_tests", "cart_tests"})
+    @BeforeMethod(description = "Get inventory page", alwaysRun = true)
+    public void getInventoryPage() {
+        inventoryPage = steps.loginViaStandardData();
+    }
+
+    @Test(description = "Check if subtitle equals expected value", groups = {"positive_tests", "cart_tests"})
     public void cartSubtitleTest() {
         Assert.assertEquals((inventoryPage.clickCartLink()).getSubtitleText(), CART_SUBTITLE_TEXT);
     }
 
-    @Test(groups = {"positive_tests", "cart_tests"})
+    @Test(description = "Check if products in inventory are same when added to cart",
+            groups = {"positive_tests", "cart_tests"})
     public void addAllProductsToCartTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
         TestUtilities.addAllProductsToCart(inventoryProductList);
@@ -31,14 +40,14 @@ public class CartTest extends LogInAndGetInventoryBeforeTest {
                 TestUtilities.transformCartProductToAbstractProductList.apply(cartProductList));
     }
 
-    @Test(groups = {"positive_tests", "cart_tests"})
+    @Test(description = "Checks if cart product count valid", groups = {"positive_tests", "cart_tests"})
     public void cartProductCountValidTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
         TestUtilities.addAllProductsToCart(inventoryProductList);
         Assert.assertEquals(inventoryPage.clickCartLink().getCartProductList().size(), CART_ALL_PRODUCT_COUNT);
     }
 
-    @Test(groups = {"positive_tests", "cart_tests"})
+    @Test(description = "Check if cart product count valid", groups = {"positive_tests", "cart_tests"})
     public void cartProductsCountInCartValidTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
         TestUtilities.addAllProductsToCart(inventoryProductList);
@@ -47,7 +56,7 @@ public class CartTest extends LogInAndGetInventoryBeforeTest {
         }
     }
 
-    @Test(groups = {"positive_tests", "cart_tests"})
+    @Test(description = "Check if can remove product from cart", groups = {"positive_tests", "cart_tests"})
     public void cartProductRemovingTest() {
         List<InventoryProduct> inventoryProductList = inventoryPage.getInventoryProductList();
         TestUtilities.addAllProductsToCart(inventoryProductList);
@@ -58,14 +67,16 @@ public class CartTest extends LogInAndGetInventoryBeforeTest {
         Assert.assertEquals(cartPage.getCartProductList().size(), EMPTY_INT_VALUE);
     }
 
-    @Test(groups = {"positive_tests", "cart_tests"})
+    @Test(description = "Check if page redirected after clicking continue button",
+            groups = {"positive_tests", "cart_tests"})
     public void continueButtonTest() {
         CartPage cartPage = inventoryPage.clickCartLink().waitForPageLoaded();
         Assert.assertTrue(cartPage.isPageOpened());
         Assert.assertTrue(cartPage.clickContinueShoppingButton().waitForPageLoaded().isPageOpened());
     }
 
-    @Test(groups = {"positive_tests", "cart_tests"})
+    @Test(description = "Add product click continue add another product and assert",
+            groups = {"positive_tests", "cart_tests"})
     public void continueShoppingTest() {
         SoftAssert softAssert = new SoftAssert();
         List<InventoryProduct> inventoryProductList;
@@ -81,7 +92,7 @@ public class CartTest extends LogInAndGetInventoryBeforeTest {
         softAssert.assertAll();
     }
 
-    @Test(groups = {"positive_tests", "cart_tests"})
+    @Test(description = "Check if checkout button available to submit", groups = {"positive_tests", "cart_tests"})
     public void checkoutButtonEnabledTest() {
         Assert.assertTrue(inventoryPage.clickCartLink().waitForPageLoaded()
                 .isCheckoutButtonEnabled());

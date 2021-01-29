@@ -1,50 +1,39 @@
 package tests.inventory_tests.sort_test;
 
+import io.qameta.allure.Description;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.inventory_page.InventoryPage;
 import products.InventoryProduct;
-import tests.abstract_tests.LogInAndGetInventoryBeforeTest;
-import utilities.comparators.ProductNameAToZComparator;
-import utilities.comparators.ProductNameZToAComparator;
-import utilities.comparators.ProductPriceHighToLowComparator;
-import utilities.comparators.ProductPriceLowToHighComparator;
+import tests.abstract_tests.AbstractTest;
+import tests.inventory_tests.values.InventorySortTestValues;
 import utilities.TestUtilities;
 
 import java.util.Comparator;
 import java.util.List;
 
-import static tests.inventory_tests.values.InventorySortTestValues.*;
+public class InventorySortTest extends AbstractTest {
+    private SortSteps sortSteps;
+    private InventoryPage inventoryPage;
 
-public class InventorySortTest extends LogInAndGetInventoryBeforeTest {
+    @BeforeMethod(description = "Open inventory page", alwaysRun = true)
+    public void getInventoryPage() {
+        inventoryPage = steps.loginViaStandardData();
+    }
 
-    private void productSortTest(String sortType, Comparator<InventoryProduct> comparator) {
+    @Test(description = "Sort products test",
+            dataProvider = "sortData", dataProviderClass = InventorySortTestValues.class,
+            groups = {"positive_tests", "inventory_tests", "inventory_sort_tests"})
+    @Description("Checks if page-sort works correct using inner sort-methods")
+    public void productSortTest(String sortType, Comparator<InventoryProduct> comparator) {
+        sortSteps = new SortSteps(getDriver(), inventoryPage);
         //get default product list and sort them using test-method
-        List<InventoryProduct> expectedProductList = inventoryPage.getInventoryProductList();
-        expectedProductList.sort(comparator);
+        List<InventoryProduct> expectedProductList =
+                sortSteps.getInventoryProductListAndSort(inventoryPage, comparator);
         //sort products on page using page-method
-        inventoryPage.selectSort(sortType);
-        List<InventoryProduct> actualProductList = inventoryPage.getInventoryProductList();
+        List<InventoryProduct> actualProductList = sortSteps.selectProductSortOnPage(inventoryPage, sortType);
         //asserting both lists
         TestUtilities.assertProductListEquals(TestUtilities.transformInventoryProductToAbstractProductList.apply(actualProductList),
                 TestUtilities.transformInventoryProductToAbstractProductList.apply(expectedProductList));
-    }
-
-    @Test(groups = {"positive_tests", "inventory_tests", "inventory_sort_tests"})
-    public void productAToZSortTest() {
-        productSortTest(SORT_SELECT_VALUE_A_TO_Z, new ProductNameAToZComparator());
-    }
-
-    @Test(groups = {"positive_tests", "inventory_tests", "inventory_sort_tests"})
-    public void productZToASortTest() {
-        productSortTest(SORT_SELECT_VALUE_Z_TO_A, new ProductNameZToAComparator());
-    }
-
-    @Test(groups = {"positive_tests", "inventory_tests", "inventory_sort_tests"})
-    public void productLowToHighSortTest() {
-        productSortTest(SORT_SELECT_VALUE_LOW_TO_HIGH, new ProductPriceLowToHighComparator());
-    }
-
-    @Test(groups = {"positive_tests", "inventory_tests", "inventory_sort_tests"})
-    public void productHighToLowSortTest() {
-        productSortTest(SORT_SELECT_VALUE_HIGH_TO_LOW, new ProductPriceHighToLowComparator());
     }
 }

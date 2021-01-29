@@ -1,13 +1,15 @@
 package tests.checkout_tests.checkout_test;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.cart_page.CartPage;
 import pages.checkout_page.CheckoutCompletePage;
 import pages.checkout_page.CheckoutStepOnePage;
 import pages.checkout_page.CheckoutStepTwoPage;
+import pages.inventory_page.InventoryPage;
 import products.InventoryProduct;
-import tests.abstract_tests.LogInAndGetInventoryBeforeTest;
+import tests.abstract_tests.AbstractTest;
 import tests.checkout_tests.values.CheckoutValues;
 import utilities.TestUtilities;
 
@@ -16,28 +18,36 @@ import java.util.List;
 import static tests.GlobalValues.EMPTY_STRING_VALUE;
 import static tests.checkout_tests.values.CheckoutValues.*;
 
-public class CheckoutTest extends LogInAndGetInventoryBeforeTest {
-    @Test(groups = {"positive_tests", "checkout_tests"})
+public class CheckoutTest extends AbstractTest {
+    private InventoryPage inventoryPage;
+
+    @BeforeMethod(description = "Get inventory page", alwaysRun = true)
+    public void getInventoryPage() {
+        inventoryPage = steps.loginViaStandardData();
+    }
+
+    @Test(description = "Check if subtitle equals expected value", groups = {"positive_tests", "checkout_tests"})
     public void checkoutInformationSubtitleTest() {
         Assert.assertEquals(TestUtilities.addOneProductGetCheckoutStepOnePage(inventoryPage).getSubtitleText(),
                 CHECKOUT_INFORMATION_SUBTITLE_TEXT);
     }
 
-    @Test(groups = {"positive_tests", "checkout_tests"})
+    @Test(description = "Check if subtitle equals expected value", groups = {"positive_tests", "checkout_tests"})
     public void checkoutOverviewSubtitleTest() {
         Assert.assertEquals(TestUtilities.addOneProductGetCheckoutStepTwoPage(inventoryPage,
                 VALID_FIRSTNAME, VALID_LASTNAME, VALID_ZIP).getSubtitleText(),
                 CHECKOUT_OVERVIEW_SUBTITLE_TEXT);
     }
 
-    @Test(groups = {"positive_tests", "checkout_tests"})
+    @Test(description = "Check if subtitle equals expected value", groups = {"positive_tests", "checkout_tests"})
     public void checkoutFinishSubtitleTest() {
         Assert.assertEquals(TestUtilities.addOneProductGetCheckoutCompletePage(inventoryPage,
                 VALID_FIRSTNAME, VALID_LASTNAME, VALID_ZIP).getSubtitleText(),
                 CHECKOUT_FINISH_SUBTITLE_TEXT);
     }
 
-    @Test(groups = {"positive_tests", "checkout_tests"})
+    @Test(description = "Check if page redirected after clicking continue button",
+            groups = {"positive_tests", "checkout_tests"})
     public void cancelButtonRedirectTest() {
         CartPage cartPage = inventoryPage
                 .clickCartLink()
@@ -47,7 +57,8 @@ public class CheckoutTest extends LogInAndGetInventoryBeforeTest {
         Assert.assertTrue(cartPage.isPageOpened());
     }
 
-    @Test(groups = {"positive_tests", "checkout_tests"})
+    @Test(description = "Checks if inputs fields available to write chars",
+            groups = {"positive_tests", "checkout_tests"})
     public void inputFieldsEnabledTests() {
         inventoryPage.getInventoryProductList().get(0).addToCart();
         CheckoutStepOnePage page = inventoryPage.clickCartLink().clickCheckoutButton();
@@ -56,7 +67,7 @@ public class CheckoutTest extends LogInAndGetInventoryBeforeTest {
         Assert.assertTrue(page.isZipFieldEnabled());
     }
 
-    @Test(groups = {"positive_tests", "checkout_tests"})
+    @Test(description = "Check if redirects to checkout step two page", groups = {"positive_tests", "checkout_tests"})
     public void continueCheckoutWithValidDataTest() {
         CheckoutStepTwoPage checkoutStepTwoPage = TestUtilities.addOneProductGetCheckoutStepTwoPage(inventoryPage,
                 VALID_FIRSTNAME, VALID_LASTNAME, VALID_ZIP);
@@ -83,7 +94,8 @@ public class CheckoutTest extends LogInAndGetInventoryBeforeTest {
                         .apply(inventoryProductList));
     }
 
-    @Test(groups = {"positive_tests", "checkout_tests"})
+    @Test(description = "Check if page redirected after clicking finish button",
+            groups = {"positive_tests", "checkout_tests"})
     public void finishButtonRedirectTest() {
         CheckoutStepTwoPage checkoutStepTwoPage = TestUtilities.addOneProductGetCheckoutStepTwoPage(inventoryPage,
                 VALID_FIRSTNAME, VALID_LASTNAME, VALID_ZIP);
@@ -92,7 +104,7 @@ public class CheckoutTest extends LogInAndGetInventoryBeforeTest {
         Assert.assertTrue(checkoutCompletePage.isPageOpened());
     }
 
-    @Test(groups = {"positive_tests", "checkout_tests"})
+    @Test(description = "Check if checkout finish delivery picture visible", groups = {"positive_tests", "checkout_tests"})
     public void checkoutFinishDeliveryPicVisibleTest() {
         Assert.assertTrue(TestUtilities.addOneProductGetCheckoutStepTwoPage(inventoryPage,
                 VALID_FIRSTNAME, VALID_LASTNAME, VALID_ZIP)
@@ -101,14 +113,15 @@ public class CheckoutTest extends LogInAndGetInventoryBeforeTest {
                 .isCompletePicDisplayed());
     }
 
-    @Test(groups = {"positive_tests", "checkout_tests"})
+    @Test(description = "Check if checkout finish message equals value", groups = {"positive_tests", "checkout_tests"})
     public void checkoutFinishMessageTest() {
         Assert.assertEquals(TestUtilities.addOneProductGetCheckoutCompletePage(inventoryPage,
                 VALID_FIRSTNAME, VALID_LASTNAME, VALID_ZIP)
                 .getCompleteText(), COMPLETE_TEXT);
     }
 
-    @Test(groups = {"negative_tests", "checkout_tests"},
+    @Test(description = "Check if error shows after submiting invalid data",
+            groups = {"negative_tests", "checkout_tests"},
             dataProvider = "invalidCheckoutData", dataProviderClass = CheckoutValues.class)
     public void errorAfterCheckoutWithWithInvalidDataTest(String firstName, String lastName, String zip, String errorMessage) {
         CheckoutStepOnePage checkoutStepOnePage = TestUtilities.addOneProductGetCheckoutStepOnePage(inventoryPage);
@@ -134,7 +147,7 @@ public class CheckoutTest extends LogInAndGetInventoryBeforeTest {
                 .isErrorDisplayed(), "checking out no products is valid");
     }
 
-    @Test(groups = {"negative_tests", "checkout_tests"})
+    @Test(description = "Check if error closes after error-button click", groups = {"negative_tests", "checkout_tests"})
     public void closeCheckoutErrorTest() {
         CheckoutStepOnePage checkoutStepOnePage = TestUtilities.addOneProductGetCheckoutStepOnePage(inventoryPage);
         checkoutStepOnePage
@@ -143,7 +156,7 @@ public class CheckoutTest extends LogInAndGetInventoryBeforeTest {
                 .setZip(EMPTY_STRING_VALUE)
                 .clickContinueButton();
         Assert.assertTrue(checkoutStepOnePage.isErrorDisplayed());
-        checkoutStepOnePage.closeError();
+        checkoutStepOnePage.clickCloseErrorButton();
         Assert.assertFalse(checkoutStepOnePage.isErrorDisplayed());
     }
 }
