@@ -57,16 +57,6 @@ public class CheckoutTest extends AbstractTest {
         Assert.assertTrue(cartPage.isPageOpened());
     }
 
-    @Test(description = "Checks if inputs fields available to write chars",
-            groups = {"positive_tests", "checkout_tests"})
-    public void inputFieldsEnabledTests() {
-        inventoryPage.getInventoryProductList().get(0).addToCart();
-        CheckoutStepOnePage page = inventoryPage.clickCartLink().clickCheckoutButton();
-        Assert.assertTrue(page.isFirstNameFieldEnabled());
-        Assert.assertTrue(page.isLastNameFieldEnabled());
-        Assert.assertTrue(page.isZipFieldEnabled());
-    }
-
     @Test(description = "Check if redirects to checkout step two page", groups = {"positive_tests", "checkout_tests"})
     public void continueCheckoutWithValidDataTest() {
         CheckoutStepTwoPage checkoutStepTwoPage = TestUtilities.addOneProductGetCheckoutStepTwoPage(inventoryPage,

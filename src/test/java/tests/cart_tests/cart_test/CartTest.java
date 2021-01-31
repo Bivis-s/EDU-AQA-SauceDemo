@@ -91,10 +91,4 @@ public class CartTest extends AbstractTest {
         softAssert.assertTrue(TestUtilities.equalProducts(inventoryProductList.get(1), cartPage.getCartProductList().get(1)));
         softAssert.assertAll();
     }
-
-    @Test(description = "Check if checkout button available to submit", groups = {"positive_tests", "cart_tests"})
-    public void checkoutButtonEnabledTest() {
-        Assert.assertTrue(inventoryPage.clickCartLink().waitForPageLoaded()
-                .isCheckoutButtonEnabled());
-    }
 }

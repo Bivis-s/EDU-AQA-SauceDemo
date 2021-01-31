@@ -42,21 +42,6 @@ public class LoginPage extends AbstractPage {
         return loginButton.isDisplayed();
     }
 
-    @Step("Check if login button enabled")
-    public boolean isLoginButtonEnabled() {
-        return loginButton.isEnabled();
-    }
-
-    @Step("Check if username button enabled")
-    public boolean isUsernameFieldEnabled() {
-        return usernameField.isEnabled();
-    }
-
-    @Step("Check if password field enabled")
-    public boolean isPasswordFieldEnabled() {
-        return passwordField.isEnabled();
-    }
-
     @Step("Click login button")
     public void clickLoginButton() {
         loginButton.click();

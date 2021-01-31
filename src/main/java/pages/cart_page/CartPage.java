@@ -62,11 +62,6 @@ public class CartPage extends FooterPage {
         return new InventoryPage(driver);
     }
 
-    @Step("Is checkout button enabled")
-    public boolean isCheckoutButtonEnabled() {
-        return checkoutButton.isEnabled();
-    }
-
     @Step("Click checkout button")
     public CheckoutStepOnePage clickCheckoutButton() {
         checkoutButton.click();

@@ -70,21 +70,6 @@ public class CheckoutStepOnePage extends AbstractCheckoutPage {
         return this;
     }
 
-    @Step("Is first name field enabled")
-    public boolean isFirstNameFieldEnabled() {
-        return firsNameInput.isEnabled();
-    }
-
-    @Step("Is last name field enabled")
-    public boolean isLastNameFieldEnabled() {
-        return lastNameInput.isEnabled();
-    }
-
-    @Step("Is zip field enabled")
-    public boolean isZipFieldEnabled() {
-        return zipInput.isEnabled();
-    }
-
     @Step("Set firs name '{firstNames}'")
     public CheckoutStepOnePage setFirstName(String... firstNames) {
         firsNameInput.sendKeys(firstNames);

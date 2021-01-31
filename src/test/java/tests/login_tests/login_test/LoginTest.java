@@ -20,17 +20,6 @@ public class LoginTest extends AbstractTest {
         loginPage.openPage();
     }
 
-    @Test(description = "Check if inputs fields available to write chars", groups = {"positive_tests", "login_tests"})
-    public void inputFieldsEnabledTest() {
-        Assert.assertTrue(loginPage.isUsernameFieldEnabled());
-        Assert.assertTrue(loginPage.isPasswordFieldEnabled());
-    }
-
-    @Test(description = "Check if login button available to submit", groups = {"positive_tests", "login_tests"})
-    public void loginButtonEnabledTest() {
-        Assert.assertTrue(loginPage.isLoginButtonEnabled());
-    }
-
     @Test(description = "Check if login pic visible", groups = {"positive_tests", "login_tests"})
     @Description("Is the robot pic visible on login page")
     public void loginPicVisibleTest() {

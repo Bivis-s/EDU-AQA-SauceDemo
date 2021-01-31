@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.inventory_page.InventoryPage;
 import products.InventoryProduct;
+import steps.SortSteps;
 import tests.abstract_tests.AbstractTest;
 import tests.inventory_tests.values.InventorySortTestValues;
 import utilities.TestUtilities;
