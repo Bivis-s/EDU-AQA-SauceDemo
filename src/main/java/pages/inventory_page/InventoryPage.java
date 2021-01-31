@@ -1,5 +1,6 @@
 package pages.inventory_page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,6 +38,7 @@ public class InventoryPage extends FooterPage {
     }
 
     @Override
+    @Step("Open inventory page")
     public InventoryPage openPage() {
         driver.get(INVENTORY_PAGE_URL);
         return waitForPageLoaded();
@@ -47,14 +49,17 @@ public class InventoryPage extends FooterPage {
         return productLabel.isDisplayed();
     }
 
+    @Step("Get subtitle text")
     public String getSubtitleText() {
         return productLabel.getText();
     }
 
+    @Step("Get subtitle picture background attribute")
     public String getSubtitlePicBackgroundAttribute() {
         return subtitlePicDiv.getCssValue("background-image");
     }
 
+    @Step("Get inventory products list")
     public List<InventoryProduct> getInventoryProductList() {
         List<InventoryProduct> inventoryProductList = new ArrayList<>();
         for (WebElement productElement : driver.findElements(PRODUCT_BY)) {
@@ -63,18 +68,22 @@ public class InventoryPage extends FooterPage {
         return inventoryProductList;
     }
 
+    @Step("Select sort '{value}'")
     public void selectSort(String value) {
         (new Select(sortSelectElement)).selectByValue(value);
     }
 
+    @Step("Is cart counter visible")
     public boolean isCartCounterVisible() {
         return !driver.findElements(CART_COUNTER_BY).isEmpty();
     }
 
+    @Step("Get cart counter count")
     public int getCartCounterCount() {
         return Integer.parseInt(driver.findElement(CART_COUNTER_BY).getText());
     }
 
+    @Step("Click cart link")
     public CartPage clickCartLink() {
         cartLink.click();
         return new CartPage(driver);

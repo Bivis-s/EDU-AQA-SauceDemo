@@ -1,5 +1,6 @@
 package utilities;
 
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import pages.checkout_page.CheckoutCompletePage;
 import pages.checkout_page.CheckoutStepOnePage;
@@ -20,6 +21,7 @@ public class TestUtilities {
         }
     }
 
+    @Step("Equal two products '{p1}' and '{p2}'")
     public static boolean equalProducts(AbstractProduct p1, AbstractProduct p2) {
         return p1.compareTo(p2) == 0;
     }
@@ -57,6 +59,7 @@ public class TestUtilities {
     public static Function<List<CartProduct>, List<AbstractProduct>>
             transformCartProductToAbstractProductList = ArrayList::new;
 
+    @Step("Add one product and get checkout step-one")
     public static CheckoutStepOnePage addOneProductGetCheckoutStepOnePage(InventoryPage inventoryPage) {
         inventoryPage.getInventoryProductList().get(0).addToCart();
         return inventoryPage
@@ -64,6 +67,7 @@ public class TestUtilities {
                 .clickCheckoutButton();
     }
 
+    @Step("Add one product and get checkout step-two")
     public static CheckoutStepTwoPage addOneProductGetCheckoutStepTwoPage(InventoryPage inventoryPage, String firstname,
                                                                           String lastname, String zip) {
         return addOneProductGetCheckoutStepOnePage(inventoryPage)
@@ -74,6 +78,7 @@ public class TestUtilities {
                 .waitForPageLoaded();
     }
 
+    @Step("Add one product and get checkout comlete page")
     public static CheckoutCompletePage addOneProductGetCheckoutCompletePage(InventoryPage inventoryPage,
                                                                             String firstname, String lastname,
                                                                             String zip) {

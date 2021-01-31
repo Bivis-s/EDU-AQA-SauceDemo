@@ -1,5 +1,6 @@
 package pages.footer_page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +23,7 @@ public abstract class FooterPage extends AbstractPage {
         super(driver);
     }
 
+    @Step("Get footer social medias text list")
     public List<String> getSocialTextList() {
         List<String> socialTextList = new ArrayList<>();
         List<WebElement> socialLiList = socialUlElement.findElements(SOCIAL_LI_BY);
@@ -33,10 +35,12 @@ public abstract class FooterPage extends AbstractPage {
         return socialTextList;
     }
 
+    @Step("Get footer copy text")
     public String getCopyText() {
         return copyDivElement.getText();
     }
 
+    @Step("Is footer picture visible")
     public boolean isPicVisible() {
         return !driver.findElements(FOOTER_PIC_BY).isEmpty();
     }
