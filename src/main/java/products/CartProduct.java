@@ -1,5 +1,6 @@
 package products;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -20,9 +21,8 @@ public class CartProduct extends AbstractProduct {
         return Integer.parseInt(product.findElement(QUANTITY_BY).getText());
     }
 
+    @Step("Remove cart product from cart")
     public void removeFromCart() {
         product.findElement(REMOVE_BUTTON_BY).click();
     }
-
-
 }

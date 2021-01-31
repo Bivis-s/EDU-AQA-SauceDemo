@@ -1,5 +1,6 @@
 package pages.checkout_page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,15 +30,18 @@ public class CheckoutStepTwoPage extends AbstractCheckoutPage {
     }
 
     @Override
+    @Step("Open checkout step-two page")
     public CheckoutStepTwoPage openPage() {
         driver.get(CHECKOUT_STEP_TWO_PAGE_URL);
         return this;
     }
 
+    @Step("Get checkout product list")
     public List<CartProduct> getCheckoutProductList() {
         return PageUtilities.getCartProductList(driver.findElements(PRODUCT_BY));
     }
 
+    @Step("Click finish checkout button")
     public CheckoutCompletePage clickFinishButton() {
         finishButton.click();
         return new CheckoutCompletePage(driver);

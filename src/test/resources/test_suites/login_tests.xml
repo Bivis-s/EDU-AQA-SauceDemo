@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="login_tests">
+<suite name="Login test">
     <test name="LoginTest">
         <groups>
             <run>
