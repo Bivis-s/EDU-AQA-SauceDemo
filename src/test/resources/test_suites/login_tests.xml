@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Login test">
+    <test name="LoginTest">
+        <groups>
+            <run>
+                <include name="login_tests"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.login_tests.*"/>
+        </packages>
+    </test>
+</suite>

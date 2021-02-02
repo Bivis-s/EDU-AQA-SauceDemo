@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Inventory test" parallel="classes" thread-count="4">
+    <test name="InventoryTest">
+        <groups>
+            <run>
+                <include name="inventory_tests"/>
+                <include name="footer_tests"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.inventory_tests.*"/>
+        </packages>
+    </test>
+</suite>

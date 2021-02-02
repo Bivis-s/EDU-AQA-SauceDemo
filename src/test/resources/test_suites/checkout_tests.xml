@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Checkout test" parallel="classes" thread-count="2">
+    <test name="CheckoutTest">
+        <groups>
+            <run>
+                <include name="checkout_tests"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.checkout_tests.*"/>
+        </packages>
+    </test>
+</suite>
