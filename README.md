@@ -84,3 +84,6 @@ Run _loginViaPropertyData_ from _PropertyLoginTest_ with property _login_ and _p
 [INFO] Finished at: 2021-01-21T17:15:55+03:00
 [INFO] ------------------------------------------------------------------------
 ```
+
+# Allure
+![image](https://user-images.githubusercontent.com/66497536/106233027-9ee3ff00-6206-11eb-81cf-70bdde2443e7.png)
