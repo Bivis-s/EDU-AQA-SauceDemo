@@ -15,7 +15,7 @@ public class DriverManagerFactory {
         switch (type) {
             case CHROME:
                 WebDriverManager.chromedriver().setup();
-                return new ChromeDriver(new ChromeOptions().addArguments("--incognito"));
+                return new ChromeDriver(new ChromeOptions().addArguments("--incognito", "--verbose"));
             case FIREFOX:
                 WebDriverManager.firefoxdriver().setup();
                 return new FirefoxDriver(new FirefoxOptions().addArguments("--incognito"));
