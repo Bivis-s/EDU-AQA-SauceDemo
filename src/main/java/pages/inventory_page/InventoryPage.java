@@ -1,7 +1,10 @@
 package pages.inventory_page;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.core.util.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +17,7 @@ import products.InventoryProduct;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j2
 public class InventoryPage extends FooterPage {
     protected static final String INVENTORY_PAGE_URL = URL + "inventory.html";
     @FindBy(xpath = "//*[contains(text(),'Product')]")
@@ -33,7 +37,13 @@ public class InventoryPage extends FooterPage {
 
     @Override
     public InventoryPage waitForPageLoaded() {
-        getWebDriverWait().until(ExpectedConditions.visibilityOf(productLabel));
+        try {
+            getWebDriverWait().until(ExpectedConditions.visibilityOf(productLabel));
+            log.info("Inventory page was loaded");
+        } catch (TimeoutException e) {
+            log.error("Inventory page was not loaded");
+            throw e;
+        }
         return this;
     }
 
@@ -41,22 +51,33 @@ public class InventoryPage extends FooterPage {
     @Step("Open inventory page")
     public InventoryPage openPage() {
         driver.get(INVENTORY_PAGE_URL);
+        log.info("Opening inventory page, URL: " + INVENTORY_PAGE_URL);
         return waitForPageLoaded();
     }
 
     @Override
     public boolean isPageOpened() {
-        return productLabel.isDisplayed();
+        boolean isPageOpened = productLabel.isDisplayed();
+        if (isPageOpened) {
+            log.info("Login page is open, URL: " + INVENTORY_PAGE_URL);
+        } else {
+            log.error("Login page was not open, URL: " + INVENTORY_PAGE_URL);
+        }
+        return isPageOpened;
     }
 
     @Step("Get subtitle text")
     public String getSubtitleText() {
-        return productLabel.getText();
+        String subtitleText = productLabel.getText();
+        log.info("Getting subtitle text: " + subtitleText);
+        return subtitleText;
     }
 
     @Step("Get subtitle picture background attribute")
     public String getSubtitlePicBackgroundAttribute() {
-        return subtitlePicDiv.getCssValue("background-image");
+        String subtitlePicBackgroundAttribute = subtitlePicDiv.getCssValue("background-image");
+        log.info("Getting subtitle picture background: " + subtitlePicBackgroundAttribute);
+        return subtitlePicBackgroundAttribute;
     }
 
     @Step("Get inventory products list")
@@ -65,27 +86,38 @@ public class InventoryPage extends FooterPage {
         for (WebElement productElement : driver.findElements(PRODUCT_BY)) {
             inventoryProductList.add(new InventoryProduct(productElement));
         }
+        log.info("Getting inventory product list: " + inventoryProductList);
         return inventoryProductList;
     }
 
     @Step("Select sort '{value}'")
     public void selectSort(String value) {
+        log.info("Selecting " + value + " sort");
         (new Select(sortSelectElement)).selectByValue(value);
     }
 
     @Step("Is cart counter visible")
     public boolean isCartCounterVisible() {
-        return !driver.findElements(CART_COUNTER_BY).isEmpty();
+        boolean isCarCounterVisible = !driver.findElements(CART_COUNTER_BY).isEmpty();
+        if (isCarCounterVisible) {
+            log.info("Car counter visible");
+        } else {
+            log.error("Car counter not visible");
+        }
+        return isCarCounterVisible;
     }
 
     @Step("Get cart counter count")
     public int getCartCounterCount() {
-        return Integer.parseInt(driver.findElement(CART_COUNTER_BY).getText());
+        int cartCounter = Integer.parseInt(driver.findElement(CART_COUNTER_BY).getText());
+        log.info("Cart counter count: " + cartCounter);
+        return cartCounter;
     }
 
     @Step("Click cart link")
     public CartPage clickCartLink() {
         cartLink.click();
-        return new CartPage(driver);
+        log.info("Clicking cart link " + cartLink);
+        return new CartPage(driver).waitForPageLoaded();
     }
 }

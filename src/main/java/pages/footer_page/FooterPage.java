@@ -1,6 +1,7 @@
 package pages.footer_page;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Log4j2
 public abstract class FooterPage extends AbstractPage {
     @FindBy(xpath = "//ul[@class='social']")
     private WebElement socialUlElement;
@@ -32,16 +34,25 @@ public abstract class FooterPage extends AbstractPage {
         }
         // sort list for not to take into account the order of strings when asserting
         Collections.sort(socialTextList);
+        log.info("Getting sorted media text list: " + socialTextList.toString());
         return socialTextList;
     }
 
     @Step("Get footer copy text")
     public String getCopyText() {
-        return copyDivElement.getText();
+        String copyText = copyDivElement.getText();
+        log.info("Getting copy text: " + copyText);
+        return copyText;
     }
 
     @Step("Is footer picture visible")
     public boolean isPicVisible() {
-        return !driver.findElements(FOOTER_PIC_BY).isEmpty();
+        boolean isPictureVisible = !driver.findElements(FOOTER_PIC_BY).isEmpty();
+        if (isPictureVisible) {
+            log.info("Footer picture visible");
+        } else {
+            log.error("Footer picture not visible");
+        }
+        return isPictureVisible;
     }
 }

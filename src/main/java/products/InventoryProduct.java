@@ -16,7 +16,7 @@ public class InventoryProduct extends AbstractProduct {
 
     public InventoryProduct(WebElement product) {
         super(product);
-        init(this, NAME_BY, DESCRIPTION_BY, PRICE_BY);
+        init(NAME_BY, DESCRIPTION_BY, PRICE_BY);
     }
 
     @Step("Is add product to cart button enabled")

@@ -1,11 +1,14 @@
 package pages.checkout_page;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Log4j2
 public class CheckoutCompletePage extends AbstractCheckoutPage {
     public static final String CHECKOUT_COMPLETE_PAGE_URL = URL + "checkout-complete.html";
     @FindBy(className = "complete-text")
@@ -19,7 +22,12 @@ public class CheckoutCompletePage extends AbstractCheckoutPage {
 
     @Override
     public CheckoutCompletePage waitForPageLoaded() {
-        getWebDriverWait().until(ExpectedConditions.visibilityOf(getSubtitle()));
+        try {
+            getWebDriverWait().until(ExpectedConditions.visibilityOf(getSubtitle()));
+        } catch (TimeoutException e) {
+            log.error("Checkout complete page was not loaded");
+            throw e;
+        }
         return this;
     }
 
@@ -27,16 +35,25 @@ public class CheckoutCompletePage extends AbstractCheckoutPage {
     @Step("Open checkout-complete page")
     public CheckoutCompletePage openPage() {
         driver.get(CHECKOUT_COMPLETE_PAGE_URL);
+        log.info("Opening checkout complete page, URL: " + CHECKOUT_COMPLETE_PAGE_URL);
         return this;
     }
 
     @Step("Get checkout complete text")
     public String getCompleteText() {
-        return completeText.getText();
+        String checkoutCompeteText = completeText.getText();
+        log.info("Getting complete text: " + checkoutCompeteText);
+        return checkoutCompeteText;
     }
 
     @Step("Is complete picture displayed")
     public boolean isCompletePicDisplayed() {
-        return completeImg.isDisplayed();
+        boolean isCompletePicDisplayed = completeImg.isDisplayed();
+        if (isCompletePicDisplayed) {
+            log.info("Complete picture is displayed");
+        } else {
+            log.error("Complete picture is not displayed");
+        }
+        return isCompletePicDisplayed;
     }
 }
