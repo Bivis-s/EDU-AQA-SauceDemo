@@ -19,7 +19,7 @@ public abstract class AbstractPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         int timeout = 10;
-        log.trace("Creating new Webdriver wait, " + timeout);
+        log.trace("Created new Webdriver wait, " + timeout);
         webDriverWait = new WebDriverWait(driver, timeout);
     }
 

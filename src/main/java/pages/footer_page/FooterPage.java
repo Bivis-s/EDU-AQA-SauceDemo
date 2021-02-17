@@ -28,31 +28,28 @@ public abstract class FooterPage extends AbstractPage {
     @Step("Get footer social medias text list")
     public List<String> getSocialTextList() {
         List<String> socialTextList = new ArrayList<>();
+        log.info("Found element list by +" + SOCIAL_LI_BY);
         List<WebElement> socialLiList = socialUlElement.findElements(SOCIAL_LI_BY);
         for (WebElement li : socialLiList) {
             socialTextList.add(li.getText());
         }
         // sort list for not to take into account the order of strings when asserting
         Collections.sort(socialTextList);
-        log.info("Getting sorted media text list: " + socialTextList.toString());
+        log.info("Got sorted media text list: " + socialTextList.toString());
         return socialTextList;
     }
 
     @Step("Get footer copy text")
     public String getCopyText() {
         String copyText = copyDivElement.getText();
-        log.info("Getting copy text: " + copyText);
+        log.info("Got copy text: " + copyText);
         return copyText;
     }
 
     @Step("Is footer picture visible")
     public boolean isPicVisible() {
         boolean isPictureVisible = !driver.findElements(FOOTER_PIC_BY).isEmpty();
-        if (isPictureVisible) {
-            log.info("Footer picture visible");
-        } else {
-            log.error("Footer picture not visible");
-        }
+        log.info("Is footer picture visible: " + isPictureVisible);
         return isPictureVisible;
     }
 }

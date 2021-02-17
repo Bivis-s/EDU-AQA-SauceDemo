@@ -25,7 +25,7 @@ public abstract class AbstractProduct implements Comparable<AbstractProduct> {
         nameText = name.getText();
         descriptionText = description.getText();
         priceValue = Double.parseDouble(price.getText().replaceAll("[^.\\d]", ""));
-        log.debug(String.format("Init " + this.getClass().getName() + " product with params: Name: %s; Description: %s; Price: %s; NameText: %s; DescriptionText: %s; PriceValue: %s;",
+        log.debug(String.format("Initiated " + this.getClass().getName() + " product with params: Name: %s; Description: %s; Price: %s; NameText: %s; DescriptionText: %s; PriceValue: %s;",
                 name, description, price, nameText, descriptionText, priceValue));
     }
 
@@ -47,6 +47,7 @@ public abstract class AbstractProduct implements Comparable<AbstractProduct> {
 
     @Override
     public int compareTo(AbstractProduct product) {
+        log.debug("Compared product " + this.toString() + " and " + product.toString());
         int result;
         if (getNameText().equals(product.getNameText()) &&
                 getDescriptionText().equals(product.getDescriptionText()) &&
@@ -57,7 +58,7 @@ public abstract class AbstractProduct implements Comparable<AbstractProduct> {
         } else {
             result = -1;
         }
-        log.debug("Comparing product " + this.toString() + " and " + product.toString() + " result: " + result);
+        log.debug("Comparison result: " + result);
         return result;
     }
 

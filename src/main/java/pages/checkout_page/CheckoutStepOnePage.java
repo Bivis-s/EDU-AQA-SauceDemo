@@ -48,33 +48,29 @@ public class CheckoutStepOnePage extends AbstractCheckoutPage {
     @Override
     @Step("Open checkout step-one page")
     public CheckoutStepOnePage openPage() {
+        log.info("Opened checkout step one page, URL: " + CHECKOUT_PAGE_URL);
         driver.get(CHECKOUT_PAGE_URL);
-        log.info("Opening checkout step one page, URL: " + CHECKOUT_PAGE_URL);
         return this;
     }
 
     @Step("Click cancel button")
     public CartPage clickCancelButton() {
+        log.info("Clicked cancel button " + cancelButton);
         cancelButton.click();
-        log.info("Clicking cancel button " + cancelButton);
         return new CartPage(driver);
     }
 
     @Step("Click continue button")
     public CheckoutStepTwoPage clickContinueButton() {
+        log.info("Clicked continue button " + continueButton);
         continueButton.click();
-        log.info("Clicking continue button " + continueButton);
         return new CheckoutStepTwoPage(driver).waitForPageLoaded();
     }
 
     @Step("Is checkout error displayed")
     public boolean isErrorDisplayed() {
         boolean isErrorDisplayed = !driver.findElements(ERROR_BY).isEmpty();
-        if (isErrorDisplayed) {
-            log.info("Checkout step two error was displayed");
-        } else {
-            log.info("Checkout step two error was not displayed");
-        }
+        log.info("Is Checkout step two error displayed: " + isErrorDisplayed);
         return isErrorDisplayed;
     }
 
@@ -87,29 +83,29 @@ public class CheckoutStepOnePage extends AbstractCheckoutPage {
 
     @Step("Click close checkout error button")
     public CheckoutStepOnePage clickCloseErrorButton() {
+        log.info("Clicked close error button, xpath: " + CLOSE_ERROR_BUTTON_BY);
         driver.findElement(CLOSE_ERROR_BUTTON_BY).click();
-        log.info("Clicking close error button, xpath: " + CLOSE_ERROR_BUTTON_BY);
         return this;
     }
 
     @Step("Set firs name '{firstNames}'")
     public CheckoutStepOnePage setFirstName(String... firstNames) {
         firsNameInput.sendKeys(firstNames);
-        log.info("Sending keys to first name input, value: " + Arrays.toString(firstNames));
+        log.info("Sent keys to first name input, value: " + Arrays.toString(firstNames));
         return this;
     }
 
     @Step("Set last name '{lastNames}'")
     public CheckoutStepOnePage setLastName(String... lastNames) {
         lastNameInput.sendKeys(lastNames);
-        log.info("Sending keys to last name input, value: " + Arrays.toString(lastNames));
+        log.info("Sent keys to last name input, value: " + Arrays.toString(lastNames));
         return this;
     }
 
     @Step("Set zip '{zips}'")
     public CheckoutStepOnePage setZip(String... zips) {
         zipInput.sendKeys(zips);
-        log.info("Sending keys to zip input, value: " + Arrays.toString(zips));
+        log.info("Sent keys to zip input, value: " + Arrays.toString(zips));
         return this;
     }
 }

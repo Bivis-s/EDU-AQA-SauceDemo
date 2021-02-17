@@ -43,30 +43,26 @@ public class LoginPage extends AbstractPage {
     @Override
     public boolean isPageOpened() {
         boolean isPageOpened = loginButton.isDisplayed();
-        if (isPageOpened) {
-            log.info("Login page is open, URL: " + LOGIN_PAGE_URL);
-        } else {
-            log.error("Login page was not open, URL: " + LOGIN_PAGE_URL);
-        }
+        log.info("Login page was opened " + isPageOpened + ", URL: " + LOGIN_PAGE_URL);
         return isPageOpened;
     }
 
     @Step("Click login button")
     public void clickLoginButton() {
-        log.info("Clicking login button " + loginButton);
+        log.info("Clicked login button " + loginButton);
         loginButton.click();
     }
 
     @Step("Enter username '{username}'")
     public LoginPage enterUsername(String username) {
-        log.info("Sending keys to username field, field:" + usernameField + ", username: " + username);
+        log.info("Sent keys to username field, field:" + usernameField + ", username: " + username);
         usernameField.sendKeys(username);
         return this;
     }
 
     @Step("Enter password '{password}'")
     public LoginPage enterPassword(String password) {
-        log.info("Sending keys to password field, field:" + usernameField + ", password: " + password);
+        log.info("Sent keys to password field, field:" + usernameField + ", password: " + password);
         passwordField.sendKeys(password);
         return this;
     }
@@ -74,22 +70,14 @@ public class LoginPage extends AbstractPage {
     @Step("Check if login picture visible")
     public boolean isLoginPicVisible() {
         boolean isLoginPicVisible = !driver.findElements(By.xpath(LOGIN_PIC_XPATH)).isEmpty();
-        if (isLoginPicVisible) {
-            log.info("Login picture visible");
-        } else {
-            log.error("Login picture is not visible");
-        }
+        log.info("Is login picture visible: " + isLoginPicVisible);
         return isLoginPicVisible;
     }
 
     @Step("Check if login error displayed")
     public boolean isErrorDisplayed() {
         boolean isErrorDisplayed = !driver.findElements(ERROR_BY).isEmpty();
-        if (isErrorDisplayed) {
-            log.info("Login error is displayed");
-        } else {
-            log.error("Login error is not displayed");
-        }
+        log.info("Is login error is displayed: " + isErrorDisplayed);
         return isErrorDisplayed;
     }
 
@@ -102,8 +90,8 @@ public class LoginPage extends AbstractPage {
 
     @Step("Close login error")
     public LoginPage closeLoginError() {
+        log.info("Clicked close login error button, xpath " + CLOSE_ERROR_BUTTON_XPATH);
         driver.findElement(By.xpath(CLOSE_ERROR_BUTTON_XPATH)).click();
-        log.info("Clicking close login error button, xpath " + CLOSE_ERROR_BUTTON_XPATH);
         return this;
     }
 

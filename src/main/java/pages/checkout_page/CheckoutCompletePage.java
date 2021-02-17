@@ -34,8 +34,8 @@ public class CheckoutCompletePage extends AbstractCheckoutPage {
     @Override
     @Step("Open checkout-complete page")
     public CheckoutCompletePage openPage() {
+        log.info("Opened checkout complete page, URL: " + CHECKOUT_COMPLETE_PAGE_URL);
         driver.get(CHECKOUT_COMPLETE_PAGE_URL);
-        log.info("Opening checkout complete page, URL: " + CHECKOUT_COMPLETE_PAGE_URL);
         return this;
     }
 
@@ -49,11 +49,7 @@ public class CheckoutCompletePage extends AbstractCheckoutPage {
     @Step("Is complete picture displayed")
     public boolean isCompletePicDisplayed() {
         boolean isCompletePicDisplayed = completeImg.isDisplayed();
-        if (isCompletePicDisplayed) {
-            log.info("Complete picture is displayed");
-        } else {
-            log.error("Complete picture is not displayed");
-        }
+        log.info("Is complete picture displayed: " + isCompletePicDisplayed);
         return isCompletePicDisplayed;
     }
 }

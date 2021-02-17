@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import products.CartProduct;
 import utilities.PageUtilities;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Log4j2
@@ -40,22 +41,22 @@ public class CheckoutStepTwoPage extends AbstractCheckoutPage {
     @Override
     @Step("Open checkout step-two page")
     public CheckoutStepTwoPage openPage() {
+        log.info("Opened checkout step two page, URL: " + CHECKOUT_STEP_TWO_PAGE_URL);
         driver.get(CHECKOUT_STEP_TWO_PAGE_URL);
-        log.info("Opening checkout step two page, URL: " + CHECKOUT_STEP_TWO_PAGE_URL);
         return this;
     }
 
     @Step("Get checkout product list")
     public List<CartProduct> getCheckoutProductList() {
         List<CartProduct> checkoutProductList = PageUtilities.getCartProductList(driver.findElements(PRODUCT_BY));
-        log.info("Getting checkout product list: " + checkoutProductList);
+        log.info("Got checkout product list: " + Arrays.toString(checkoutProductList.toArray()));
         return checkoutProductList;
     }
 
     @Step("Click finish checkout button")
     public CheckoutCompletePage clickFinishButton() {
+        log.info("Clicked finish button " + finishButton);
         finishButton.click();
-        log.info("Clicking finish button " + finishButton);
         return new CheckoutCompletePage(driver);
     }
 }

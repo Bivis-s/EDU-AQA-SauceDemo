@@ -19,25 +19,20 @@ public abstract class AbstractCheckoutPage extends FooterPage {
     @Step("Open checkout page")
     public boolean isPageOpened() {
         boolean isPageOpened = driver.findElement(SUBTITLE).isDisplayed();
-        String className = this.getClass().getName();
-        if (isPageOpened) {
-            log.info(className+ " opened, subtitle: " + SUBTITLE);
-        } else {
-            log.error(className+ " not opened");
-        }
+        log.info("Is " + this.getClass().getName() + " opened, subtitle: " + SUBTITLE + "value: " + isPageOpened);
         return isPageOpened;
     }
 
     @Step("Get checkout subtitle")
     protected WebElement getSubtitle() {
-        log.info("Finding subtitle element, xpath: " + SUBTITLE);
+        log.info("Found subtitle element, xpath: " + SUBTITLE);
         return driver.findElement(SUBTITLE);
     }
 
     @Step("Get checkout subtitle text")
     public String getSubtitleText() {
-        String subtitleText = getSubtitle().getText();
-        log.info("Getting subtitle text: " + subtitleText);
+        String subtitleText = driver.findElement(SUBTITLE).getText();
+        log.info("Got subtitle text: " + subtitleText);
         return subtitleText;
     }
 }

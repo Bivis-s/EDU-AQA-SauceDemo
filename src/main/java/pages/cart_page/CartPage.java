@@ -45,26 +45,22 @@ public class CartPage extends FooterPage {
     @Override
     @Step("Open cart page")
     public CartPage openPage() {
+        log.info("Opened cart page, URL: " + CART_PAGE_URL);
         driver.get(CART_PAGE_URL);
-        log.info("Opening cart page, URL: " + CART_PAGE_URL);
         return waitForPageLoaded();
     }
 
     @Override
     public boolean isPageOpened() {
         boolean isPageOpened = subtitle.isDisplayed();
-        if (isPageOpened) {
-            log.info("Cart page is open, URL: " + CART_PAGE_URL);
-        } else {
-            log.error("Cart page was not open, URL: " + CART_PAGE_URL);
-        }
+        log.info("is Cart page " + CART_PAGE_URL + " opened, URL: " + isPageOpened);
         return isPageOpened;
     }
 
     @Step("Get cart products list")
     public List<CartProduct> getCartProductList() {
         List<CartProduct> getCartProductList = PageUtilities.getCartProductList(driver.findElements(PRODUCT_BY));
-        log.info("Getting cart product list: " + getCartProductList);
+        log.info("Get cart product list: " + getCartProductList);
         return getCartProductList;
     }
 
@@ -77,15 +73,15 @@ public class CartPage extends FooterPage {
 
     @Step("Click continue shopping button")
     public InventoryPage clickContinueShoppingButton() {
-        continueShoppingButton.click();
         log.info("Clicking continue shopping button " + continueShoppingButton);
+        continueShoppingButton.click();
         return new InventoryPage(driver);
     }
 
     @Step("Click checkout button")
     public CheckoutStepOnePage clickCheckoutButton() {
-        checkoutButton.click();
         log.info("Clicking checkout button " + checkoutButton);
+        checkoutButton.click();
         return new CheckoutStepOnePage(driver).waitForPageLoaded();
     }
 }
