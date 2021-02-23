@@ -15,6 +15,17 @@ import java.util.List;
 import java.util.function.Function;
 
 public class TestUtilities {
+    /**
+     * Transforms List<InventoryProduct> to List<AbstractProduct>> for later comparison
+     */
+    public static Function<List<InventoryProduct>, List<AbstractProduct>>
+            transformInventoryProductToAbstractProductList = ArrayList::new;
+    /**
+     * Transforms List<CartProduct> to List<AbstractProduct>> for later comparison
+     */
+    public static Function<List<CartProduct>, List<AbstractProduct>>
+            transformCartProductToAbstractProductList = ArrayList::new;
+
     public static void addAllProductsToCart(List<InventoryProduct> invProdList) {
         for (InventoryProduct ip : invProdList) {
             ip.addToCart();
@@ -46,18 +57,6 @@ public class TestUtilities {
             Assert.fail("Lists have different sizes");
         }
     }
-
-    /**
-     * Transforms List<InventoryProduct> to List<AbstractProduct>> for later comparison
-     */
-    public static Function<List<InventoryProduct>, List<AbstractProduct>>
-            transformInventoryProductToAbstractProductList = ArrayList::new;
-
-    /**
-     * Transforms List<CartProduct> to List<AbstractProduct>> for later comparison
-     */
-    public static Function<List<CartProduct>, List<AbstractProduct>>
-            transformCartProductToAbstractProductList = ArrayList::new;
 
     @Step("Add one product and get checkout step-one")
     public static CheckoutStepOnePage addOneProductGetCheckoutStepOnePage(InventoryPage inventoryPage) {

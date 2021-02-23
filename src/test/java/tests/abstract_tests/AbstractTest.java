@@ -9,8 +9,8 @@ import steps.Steps;
 
 @Listeners(ScreenshotTestListener.class)
 public abstract class AbstractTest {
-    private WebDriver driver;
     protected Steps steps;
+    private WebDriver driver;
 
     public WebDriver getDriver() {
         return driver;

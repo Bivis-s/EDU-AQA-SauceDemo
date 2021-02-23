@@ -13,7 +13,7 @@ import utilities.TestUtilities;
 
 import java.util.List;
 
-import static tests.GlobalValues.*;
+import static tests.GlobalValues.EMPTY_INT_VALUE;
 import static tests.cart_tests.values.CartTestValues.*;
 
 public class CartTest extends AbstractTest {

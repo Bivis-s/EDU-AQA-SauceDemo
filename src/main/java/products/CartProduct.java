@@ -14,7 +14,7 @@ public class CartProduct extends AbstractProduct {
 
     public CartProduct(WebElement product) {
         super(product);
-        init(this, NAME_BY, DESCRIPTION_BY, PRICE_BY);
+        init(NAME_BY, DESCRIPTION_BY, PRICE_BY);
     }
 
     public int getQuantity() {

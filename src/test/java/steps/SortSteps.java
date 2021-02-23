@@ -27,6 +27,6 @@ public class SortSteps {
     @Step("Select product sort on page")
     public List<InventoryProduct> selectProductSortOnPage(InventoryPage inventoryPage, String sortType) {
         inventoryPage.selectSort(sortType);
-        return  inventoryPage.getInventoryProductList();
+        return inventoryPage.getInventoryProductList();
     }
 }

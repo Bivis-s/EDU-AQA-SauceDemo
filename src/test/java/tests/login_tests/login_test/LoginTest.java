@@ -8,7 +8,8 @@ import pages.login_page.LoginPage;
 import tests.abstract_tests.AbstractTest;
 import tests.login_tests.values.LoginTestValues;
 
-import static tests.GlobalValues.*;
+import static tests.GlobalValues.STANDARD_USER_PASSWORD;
+import static tests.GlobalValues.STANDARD_USER_USERNAME;
 import static tests.login_tests.values.LoginTestValues.*;
 
 public class LoginTest extends AbstractTest {
@@ -28,7 +29,7 @@ public class LoginTest extends AbstractTest {
 
     @Test(description = "Check if you can login using standard user data", groups = {"positive_tests", "login_tests"})
     public void loginViaStandardUserTest() {
-        Assert.assertTrue(loginPage.login(STANDARD_USER_USERNAME, STANDARD_USER_PASSWORD)
+        Assert.assertTrue(loginPage.login(STANDARD_USER_USERNAME, STANDARD_USER_PASSWORD).waitForPageLoaded()
                 .isPageOpened());
     }
 
@@ -36,12 +37,12 @@ public class LoginTest extends AbstractTest {
             groups = {"positive_tests", "login_tests"})
     public void loginViaPerformanceGlitchUserTest() {
         Assert.assertTrue(loginPage.login(PERFORMANCE_GLITCH_USER_USERNAME, PERFORMANCE_GLITCH_USER_PASSWORD)
-                .isPageOpened());
+                .waitForPageLoaded().isPageOpened());
     }
 
     @Test(description = "Check if you can login using problem user data", groups = {"positive_tests", "login_tests"})
     public void loginViaProblemUserTest() {
-        Assert.assertTrue(loginPage.login(PROBLEM_USER_USERNAME, PROBLEM_USER_PASSWORD)
+        Assert.assertTrue(loginPage.login(PROBLEM_USER_USERNAME, PROBLEM_USER_PASSWORD).waitForPageLoaded()
                 .isPageOpened());
     }
 
