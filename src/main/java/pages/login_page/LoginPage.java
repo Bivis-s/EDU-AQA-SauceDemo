@@ -12,16 +12,16 @@ import pages.inventory_page.InventoryPage;
 @Log4j2
 public class LoginPage extends AbstractPage {
     protected static final String LOGIN_PAGE_URL = URL;
+    private final String LOGIN_PIC_XPATH = "//img[contains(@class,'bot_column') and not(@style='hidden')]";
+    private final String ERROR_XPATH = "//*[contains(@data-test,'error')]";
+    private final By ERROR_BY = By.xpath(ERROR_XPATH);
+    private final String CLOSE_ERROR_BUTTON_XPATH = ERROR_XPATH + "//button[contains(@class,'error-button')]";
     @FindBy(id = "user-name")
     private WebElement usernameField;
     @FindBy(id = "password")
     private WebElement passwordField;
     @FindBy(id = "login-button")
     private WebElement loginButton;
-    private final String LOGIN_PIC_XPATH = "//img[contains(@class,'bot_column') and not(@style='hidden')]";
-    private final String ERROR_XPATH = "//*[contains(@data-test,'error')]";
-    private final By ERROR_BY = By.xpath(ERROR_XPATH);
-    private final String CLOSE_ERROR_BUTTON_XPATH = ERROR_XPATH + "//button[contains(@class,'error-button')]";
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -98,6 +98,6 @@ public class LoginPage extends AbstractPage {
     @Step("Login using username '{username}' and password '{password}'")
     public InventoryPage login(String username, String password) {
         enterUsername(username).enterPassword(password).clickLoginButton();
-        return new InventoryPage(driver).waitForPageLoaded();
+        return new InventoryPage(driver);
     }
 }

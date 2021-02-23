@@ -21,7 +21,8 @@ public class Steps {
         LoginPage loginPage = new LoginPage(driver);
         loginPage
                 .openPage()
-                .login(STANDARD_USER_USERNAME, STANDARD_USER_PASSWORD);
+                .login(STANDARD_USER_USERNAME, STANDARD_USER_PASSWORD)
+                .waitForPageLoaded();
         InventoryPage inventoryPage = new InventoryPage(driver);
         if (!inventoryPage.waitForPageLoaded().isPageOpened()) {
             Assert.fail("Inventory page has not been loaded");

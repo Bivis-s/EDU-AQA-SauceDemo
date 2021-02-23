@@ -19,13 +19,13 @@ import java.util.List;
 @Log4j2
 public class CartPage extends FooterPage {
     protected static final String CART_PAGE_URL = URL + "cart.html";
+    private final By PRODUCT_BY = By.xpath("//*[contains(@class,'cart_list')]//*[@class='cart_item']");
     @FindBy(xpath = "//*[contains(@class, 'subheader')]")
     private WebElement subtitle;
     @FindBy(xpath = "//*[contains(@class, 'btn_secondary') and contains(text(),'Continue')]")
     private WebElement continueShoppingButton;
     @FindBy(xpath = "//*[contains(@class, 'btn_action checkout_button') and contains(text(),'CHECKOUT')]")
     private WebElement checkoutButton;
-    private final By PRODUCT_BY = By.xpath("//*[contains(@class,'cart_list')]//*[@class='cart_item']");
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -53,7 +53,7 @@ public class CartPage extends FooterPage {
     @Override
     public boolean isPageOpened() {
         boolean isPageOpened = subtitle.isDisplayed();
-        log.info("is Cart page " + CART_PAGE_URL + " opened, URL: " + isPageOpened);
+        log.info("is Cart page opened: " + isPageOpened + ", URL: " + CART_PAGE_URL);
         return isPageOpened;
     }
 

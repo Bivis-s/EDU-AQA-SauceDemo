@@ -20,6 +20,8 @@ import java.util.List;
 @Log4j2
 public class InventoryPage extends FooterPage {
     protected static final String INVENTORY_PAGE_URL = URL + "inventory.html";
+    private final By PRODUCT_BY = By.xpath("//*[contains(@class,'inventory_list')]//*[@class='inventory_item']");
+    private final By CART_COUNTER_BY = By.xpath("//*[contains(@class, 'fa-layers-counter')]");
     @FindBy(xpath = "//*[contains(text(),'Product')]")
     private WebElement productLabel;
     @FindBy(xpath = "//*[contains(@class,'peek')]")
@@ -28,8 +30,6 @@ public class InventoryPage extends FooterPage {
     private WebElement sortSelectElement;
     @FindBy(xpath = "//*[contains(@class,'shopping_cart_link')]")
     private WebElement cartLink;
-    private final By PRODUCT_BY = By.xpath("//*[contains(@class,'inventory_list')]//*[@class='inventory_item']");
-    private final By CART_COUNTER_BY = By.xpath("//*[contains(@class, 'fa-layers-counter')]");
 
     public InventoryPage(WebDriver driver) {
         super(driver);

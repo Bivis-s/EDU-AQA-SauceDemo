@@ -14,12 +14,12 @@ import java.util.List;
 
 @Log4j2
 public abstract class FooterPage extends AbstractPage {
+    private final By SOCIAL_LI_BY = By.xpath(".//li");
+    private final By FOOTER_PIC_BY = By.xpath("//img[contains(@class,'footer_robot') and not(@style='hidden')]");
     @FindBy(xpath = "//ul[@class='social']")
     private WebElement socialUlElement;
-    private final By SOCIAL_LI_BY = By.xpath(".//li");
     @FindBy(xpath = "//*[contains(@class,'footer_copy')]")
     private WebElement copyDivElement;
-    private final By FOOTER_PIC_BY = By.xpath("//img[contains(@class,'footer_robot') and not(@style='hidden')]");
 
     public FooterPage(WebDriver driver) {
         super(driver);

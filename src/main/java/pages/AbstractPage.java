@@ -7,13 +7,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Log4j2
 public abstract class AbstractPage {
-    protected WebDriver driver;
     protected static final String URL = "https://www.saucedemo.com/";
     private final WebDriverWait webDriverWait;
-
-    public WebDriverWait getWebDriverWait() {
-        return webDriverWait;
-    }
+    protected WebDriver driver;
 
     public AbstractPage(WebDriver driver) {
         this.driver = driver;
@@ -21,6 +17,10 @@ public abstract class AbstractPage {
         int timeout = 10;
         log.trace("Created new Webdriver wait, " + timeout);
         webDriverWait = new WebDriverWait(driver, timeout);
+    }
+
+    public WebDriverWait getWebDriverWait() {
+        return webDriverWait;
     }
 
     public abstract AbstractPage waitForPageLoaded();

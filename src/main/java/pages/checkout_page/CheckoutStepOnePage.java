@@ -15,6 +15,10 @@ import java.util.Arrays;
 @Log4j2
 public class CheckoutStepOnePage extends AbstractCheckoutPage {
     protected static final String CHECKOUT_PAGE_URL = URL + "checkout-step-one.html";
+    private final String ERROR_XPATH = "//*[@data-test='error']";
+    private final By ERROR_BY = By.xpath(ERROR_XPATH);
+    private final String CLOSE_ERROR_BUTTON_XPATH = ERROR_XPATH + "//button[@class='error-button']";
+    private final By CLOSE_ERROR_BUTTON_BY = By.xpath(CLOSE_ERROR_BUTTON_XPATH);
     @FindBy(xpath = "//*[contains(@class,'btn_secondary') and contains(text(), 'CANCEL')]")
     private WebElement cancelButton;
     @FindBy(xpath = "//*[contains(@class,'cart_button') and contains(@value, 'CONTINUE')]")
@@ -25,10 +29,6 @@ public class CheckoutStepOnePage extends AbstractCheckoutPage {
     private WebElement lastNameInput;
     @FindBy(id = "postal-code")
     private WebElement zipInput;
-    private final String ERROR_XPATH = "//*[@data-test='error']";
-    private final By ERROR_BY = By.xpath(ERROR_XPATH);
-    private final String CLOSE_ERROR_BUTTON_XPATH = ERROR_XPATH + "//button[@class='error-button']";
-    private final By CLOSE_ERROR_BUTTON_BY = By.xpath(CLOSE_ERROR_BUTTON_XPATH);
 
     public CheckoutStepOnePage(WebDriver driver) {
         super(driver);
@@ -90,22 +90,22 @@ public class CheckoutStepOnePage extends AbstractCheckoutPage {
 
     @Step("Set firs name '{firstNames}'")
     public CheckoutStepOnePage setFirstName(String... firstNames) {
-        firsNameInput.sendKeys(firstNames);
         log.info("Sent keys to first name input, value: " + Arrays.toString(firstNames));
+        firsNameInput.sendKeys(firstNames);
         return this;
     }
 
     @Step("Set last name '{lastNames}'")
     public CheckoutStepOnePage setLastName(String... lastNames) {
-        lastNameInput.sendKeys(lastNames);
         log.info("Sent keys to last name input, value: " + Arrays.toString(lastNames));
+        lastNameInput.sendKeys(lastNames);
         return this;
     }
 
     @Step("Set zip '{zips}'")
     public CheckoutStepOnePage setZip(String... zips) {
-        zipInput.sendKeys(zips);
         log.info("Sent keys to zip input, value: " + Arrays.toString(zips));
+        zipInput.sendKeys(zips);
         return this;
     }
 }
